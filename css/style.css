@@ -1,0 +1,147 @@
+body {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 80px; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0; 
+    font-family: sans-serif; 
+    /* TAMBAHAN: Mencegah scrollbar horizontal jika ada lingkaran yang keluar layar di sebelah kanan */
+    overflow-x: hidden; 
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Koreksi flexbox: untuk meratakan elemen flex ke kiri */
+    text-align: left;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.logo {
+    background-color: black;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Membuatnya menjadi lingkaran */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Circular Std', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-family: 'Circular Std', sans-serif;
+    font-weight: 900; /* Menggunakan ketebalan Black / Sangat Tebal */
+    margin: 0;
+}
+
+.separator {
+    width: 400px; /* Garis hitam agak pendek */
+    height: 3px; /* Ketebalan garis */
+    background-color: black;
+    border: none;
+    margin: 24px 0;
+}
+
+.description {
+    font-family: 'Circular Std', sans-serif;
+    font-weight: 400; /* Menggunakan ketebalan Book / Regular */
+    line-height: 1.6;
+    margin: 0;
+    color: #333; /* Warna sedikit lebih lembut untuk keterbacaan paragraf */
+}
+
+/* =========================================
+   PORTFOLIO SHOWCASE GALLERY (Bagian Kanan)
+========================================= */
+
+.showcase {
+    display: flex;
+    gap: 40px; 
+    /* UBAH: Perlebar ukuran showcase menjadi 800px agar lingkaran 300px beserta bayangannya tidak terpotong */
+    width: 800px; 
+    height: 100vh; 
+    overflow: hidden; 
+    position: relative;
+    background: transparent; 
+}
+
+.column {
+    flex: 1;
+    height: 100%;
+    /* FIX 3 & 4: Gunakan scroll browser asli yang halus untuk user interaksi */
+    overflow-y: scroll; /* Aktifkan scrollbar (tapi nanti disembunyikan) */
+    
+    /* FIX 1: Hapus warna background jika ada */
+    background: none; 
+
+    /* FIX 1: Tambahkan padding untuk menampung full shadow lingkaran agar tidak clipping/kelihatan patah */
+    padding: 30px 30px; 
+    box-sizing: border-box; /* Pastikan padding masuk dalam tinggi total */
+
+    /* MENYEMBUNYIKAN SCROLLBAR (untuk semua browser) */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* MENYEMBUNYIKAN SCROLLBAR (untuk Webkit: Chrome, Safari) */
+.column::-webkit-scrollbar {
+    display: none;
+}
+
+.col-track {
+    display: flex;
+    flex-direction: column;
+    /* TAMBAHAN: Pastikan lingkaran berada tepat di tengah kolom agar tidak menabrak pinggiran */
+    align-items: center; 
+    gap: 30px; 
+    padding: 0;
+    background: none;
+}
+
+/* Ukuran dan bentuk lingkaran dibuat SAMA SEMUA */
+.circle {
+    /* --- UBAH UKURAN LINGKARAN DI SINI --- */
+    width: 300px;
+    height: 300px;
+    /* -------------------------------------- */
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    
+    /* Efek floating agar tetap terasa 'hidup' (bernapas) */
+    animation: float 5s ease-in-out infinite; 
+    
+    /* FIX 1 & 4: Optimasi rendering dengan will-change, memastikan transparency */
+    background: transparent;
+    box-sizing: border-box;
+    will-change: transform; /* Beritahu browser untuk mengoptimalkan animasi */
+}
+
+/* Memberikan jeda animasi agar gerak napasnya selang-seling */
+.circle:nth-child(even) {
+    animation-delay: 2.5s; 
+}
+
+.circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none; /* Penting! Mencegah gambar error terseret (native browser drag) saat menggunakan kursor mouse */
+}
+
+/* Animasi Keyframes Floating (Tetap dipertahankan) */
+@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
