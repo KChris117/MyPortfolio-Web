@@ -2,48 +2,57 @@ window.addEventListener('load', () => {
     const colLeft = document.getElementById('col-left');
     const colRight = document.getElementById('col-right');
 
-    // Helper function untuk menggandakan elemen 2 kali (Total 3 Copy)
+    // FIX: Kita gandakan jadi 3 kali saja (Total 4 Copy)
     function duplicateContent(column) {
         const track = column.querySelector('.col-track');
         const children = Array.from(track.children);
         
         const height1 = track.scrollHeight;
         
-        // Tambahkan Copy ke-2
-        children.forEach(child => {
-            track.appendChild(child.cloneNode(true));
-        });
+        for (let i = 0; i < 3; i++) {
+            children.forEach(child => {
+                track.appendChild(child.cloneNode(true));
+            });
+        }
         
         const height2 = track.scrollHeight;
         
-        // Tambahkan Copy ke-3
-        children.forEach(child => {
-            track.appendChild(child.cloneNode(true));
-        });
-        
-        // Mengembalikan tinggi pasti dari 1 set elemen (termasuk gap)
-        return height2 - height1;
+        // (Tinggi 4 copy - Tinggi 1 copy) dibagi 3 = Tinggi tepat 1 segment
+        return (height2 - height1) / 3;
     }
 
     const segmentHeightLeft = duplicateContent(colLeft);
     const segmentHeightRight = duplicateContent(colRight);
 
-    // Atur posisi awal scroll kedua kolom tepat di awal Copy ke-2 (area tengah)
-    // Ini membuat user bisa langsung scroll bebas ke atas maupun ke bawah tanpa mentok
-    colLeft.scrollTop = segmentHeightLeft;
-    colRight.scrollTop = segmentHeightRight;
+    // Atur posisi awal persis di area tengah (zona aman) dari 4 copy
+    colLeft.scrollTop = 1.5 * segmentHeightLeft;
+    colRight.scrollTop = 1.5 * segmentHeightRight;
 
     // Buat status interaksi independen untuk masing-masing kolom
     colLeft.isInteracting = false;
     colRight.isInteracting = false;
 
+    // Variabel presisi tingkat tinggi (mencegah animasi patah dan speed yang beda)
+    let exactScrollLeft = 1.5 * segmentHeightLeft;
+    let exactScrollRight = 1.5 * segmentHeightRight;
+
     // 1. FUNGSI SLIDESHOW OTOMATIS
     function autoScroll() {
-        // Kolom Kiri: Jalan ke Atas jika tidak sedang di-scroll manual
-        if (!colLeft.isInteracting) colLeft.scrollTop += 1.5; 
+        if (!colLeft.isInteracting) {
+            exactScrollLeft += 1.5; 
+            if (exactScrollLeft >= 2.5 * segmentHeightLeft) exactScrollLeft -= segmentHeightLeft;
+            colLeft.scrollTop = exactScrollLeft;
+        } else {
+            exactScrollLeft = colLeft.scrollTop; // Sinkronisasi saat manual scroll
+        }
         
-        // Kolom Kanan: Jalan ke Bawah jika tidak sedang di-scroll manual
-        if (!colRight.isInteracting) colRight.scrollTop -= 1.5; 
+        if (!colRight.isInteracting) {
+            exactScrollRight -= 1.5; 
+            if (exactScrollRight <= 0.5 * segmentHeightRight) exactScrollRight += segmentHeightRight;
+            colRight.scrollTop = exactScrollRight;
+        } else {
+            exactScrollRight = colRight.scrollTop; // Sinkronisasi saat manual scroll
+        }
         
         requestAnimationFrame(autoScroll);
     }
@@ -52,13 +61,14 @@ window.addEventListener('load', () => {
     // 2. FUNGSI SEAMLESS LOOP & MANUAL SCROLL
     function setupColumnScroll(element, segmentHeight) {
         element.addEventListener('scroll', () => {
-            // Jika scroll ke bawah sudah masuk setengah ke Copy 3, tarik mundur 1 set ke Copy 2
-            if (element.scrollTop >= 1.5 * segmentHeight) {
-                element.scrollTop -= segmentHeight; 
-            } 
-            // Jika scroll ke atas mentok di Copy 1, dorong maju 1 set ke Copy 2
-            else if (element.scrollTop <= 0) {
-                element.scrollTop += segmentHeight; 
+            if (element.isInteracting) {
+                // Hysteresis yang aman: memberikan toleransi area sangat luas agar tak menabrak 0 atau akhir batas scroll
+                if (element.scrollTop >= 2.5 * segmentHeight) {
+                    element.scrollTop -= segmentHeight; 
+                } 
+                else if (element.scrollTop <= 0.5 * segmentHeight) {
+                    element.scrollTop += segmentHeight; 
+                }
             }
         });
 

@@ -83,7 +83,7 @@ body {
     background: none; 
 
     /* FIX 1: Tambahkan padding untuk menampung full shadow lingkaran agar tidak clipping/kelihatan patah */
-    padding: 30px 30px; 
+    padding: 2vh 30px; /* Diperkecil agar memberi ruang lebih untuk 4 gambar */
     box-sizing: border-box; /* Pastikan padding masuk dalam tinggi total */
 
     /* MENYEMBUNYIKAN SCROLLBAR (untuk semua browser) */
@@ -101,7 +101,7 @@ body {
     flex-direction: column;
     /* TAMBAHAN: Pastikan lingkaran berada tepat di tengah kolom agar tidak menabrak pinggiran */
     align-items: center; 
-    gap: 30px; 
+    gap: 3vh; /* Jarak proporsional yang pas untuk 4 gambar (4*3 = 12vh) */
     padding: 0;
     background: none;
 }
@@ -109,8 +109,8 @@ body {
 /* Ukuran dan bentuk lingkaran dibuat SAMA SEMUA */
 .circle {
     /* --- UBAH UKURAN LINGKARAN DI SINI --- */
-    width: 300px;
-    height: 300px;
+    width: 22vh; /* Diperkecil agar murni muat 4 gambar (4*22 = 88vh) */
+    height: 22vh;
     /* -------------------------------------- */
     border-radius: 50%;
     overflow: hidden;
