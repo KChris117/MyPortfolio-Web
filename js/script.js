@@ -2,79 +2,116 @@ window.addEventListener('load', () => {
     const colLeft = document.getElementById('col-left');
     const colRight = document.getElementById('col-right');
 
-    // FIX: Kita gandakan jadi 3 kali saja (Total 4 Copy)
+    // Fungsi menggandakan elemen agar bisa infinite loop
     function duplicateContent(column) {
         const track = column.querySelector('.col-track');
         const children = Array.from(track.children);
-        
-        const height1 = track.scrollHeight;
-        
         for (let i = 0; i < 3; i++) {
             children.forEach(child => {
                 track.appendChild(child.cloneNode(true));
             });
         }
-        
-        const height2 = track.scrollHeight;
-        
-        // (Tinggi 4 copy - Tinggi 1 copy) dibagi 3 = Tinggi tepat 1 segment
-        return (height2 - height1) / 3;
     }
 
-    const segmentHeightLeft = duplicateContent(colLeft);
-    const segmentHeightRight = duplicateContent(colRight);
+    duplicateContent(colLeft);
+    duplicateContent(colRight);
 
-    // Atur posisi awal persis di area tengah (zona aman) dari 4 copy
-    colLeft.scrollTop = 1.5 * segmentHeightLeft;
-    colRight.scrollTop = 1.5 * segmentHeightRight;
+    let segmentLeft = { x: 0, y: 0 };
+    let segmentRight = { x: 0, y: 0 };
 
-    // Buat status interaksi independen untuk masing-masing kolom
+    // Mengukur panjang/lebar 1 set (1 segment) secara akurat dari 4 set yang ada
+    function updateSegments() {
+        segmentLeft.x = colLeft.querySelector('.col-track').scrollWidth / 4;
+        segmentLeft.y = colLeft.querySelector('.col-track').scrollHeight / 4;
+        segmentRight.x = colRight.querySelector('.col-track').scrollWidth / 4;
+        segmentRight.y = colRight.querySelector('.col-track').scrollHeight / 4;
+    }
+
+    updateSegments();
+
+    let isMobile = window.innerWidth <= 1420;
+
+    // Atur posisi awal di tengah (zona aman)
+    colLeft.scrollTop = 1.5 * segmentLeft.y;
+    colRight.scrollTop = 1.5 * segmentRight.y;
+    colLeft.scrollLeft = 1.5 * segmentLeft.x;
+    colRight.scrollLeft = 1.5 * segmentRight.x;
+
+    let exactScrollLeft = isMobile ? colLeft.scrollLeft : colLeft.scrollTop;
+    let exactScrollRight = isMobile ? colRight.scrollLeft : colRight.scrollTop;
+
+    // Jika layar di-resize dari PC ke HP atau sebaliknya, kita reset dan sesuaikan ukurannya
+    window.addEventListener('resize', () => {
+        let wasMobile = isMobile;
+        isMobile = window.innerWidth <= 1420;
+        updateSegments();
+        
+        if (wasMobile !== isMobile) {
+            exactScrollLeft = isMobile ? 1.5 * segmentLeft.x : 1.5 * segmentLeft.y;
+            exactScrollRight = isMobile ? 1.5 * segmentRight.x : 1.5 * segmentRight.y;
+            colLeft.scrollTop = 1.5 * segmentLeft.y;
+            colLeft.scrollLeft = 1.5 * segmentLeft.x;
+            colRight.scrollTop = 1.5 * segmentRight.y;
+            colRight.scrollLeft = 1.5 * segmentRight.x;
+        }
+    });
+
     colLeft.isInteracting = false;
     colRight.isInteracting = false;
 
-    // Variabel presisi tingkat tinggi (mencegah animasi patah dan speed yang beda)
-    let exactScrollLeft = 1.5 * segmentHeightLeft;
-    let exactScrollRight = 1.5 * segmentHeightRight;
-
-    // 1. FUNGSI SLIDESHOW OTOMATIS
+    // 1. FUNGSI SLIDESHOW OTOMATIS (Mendukung Vertikal PC & Horizontal HP)
     function autoScroll() {
-        if (!colLeft.isInteracting) {
-            exactScrollLeft += 1.5; 
-            if (exactScrollLeft >= 2.5 * segmentHeightLeft) exactScrollLeft -= segmentHeightLeft;
-            colLeft.scrollTop = exactScrollLeft;
+        if (isMobile) {
+            // HP: HORIZONTAL SLIDESHOW
+            // Baris 1: Kiri ke Kanan (scrollLeft berkurang)
+            if (!colLeft.isInteracting) {
+                exactScrollLeft -= 1.5;
+                if (exactScrollLeft <= 0.5 * segmentLeft.x) exactScrollLeft += segmentLeft.x;
+                colLeft.scrollLeft = exactScrollLeft;
+            } else exactScrollLeft = colLeft.scrollLeft;
+
+            // Baris 2: Kanan ke Kiri (scrollLeft bertambah)
+            if (!colRight.isInteracting) {
+                exactScrollRight += 1.5;
+                if (exactScrollRight >= 2.5 * segmentRight.x) exactScrollRight -= segmentRight.x;
+                colRight.scrollLeft = exactScrollRight;
+            } else exactScrollRight = colRight.scrollLeft;
         } else {
-            exactScrollLeft = colLeft.scrollTop; // Sinkronisasi saat manual scroll
+            // PC: VERTIKAL SLIDESHOW
+            // Kolom Kiri: Bawah ke Atas (scrollTop bertambah)
+            if (!colLeft.isInteracting) {
+                exactScrollLeft += 1.5; 
+                if (exactScrollLeft >= 2.5 * segmentLeft.y) exactScrollLeft -= segmentLeft.y;
+                colLeft.scrollTop = exactScrollLeft;
+            } else exactScrollLeft = colLeft.scrollTop;
+            
+            // Kolom Kanan: Atas ke Bawah (scrollTop berkurang)
+            if (!colRight.isInteracting) {
+                exactScrollRight -= 1.5; 
+                if (exactScrollRight <= 0.5 * segmentRight.y) exactScrollRight += segmentRight.y;
+                colRight.scrollTop = exactScrollRight;
+            } else exactScrollRight = colRight.scrollTop;
         }
-        
-        if (!colRight.isInteracting) {
-            exactScrollRight -= 1.5; 
-            if (exactScrollRight <= 0.5 * segmentHeightRight) exactScrollRight += segmentHeightRight;
-            colRight.scrollTop = exactScrollRight;
-        } else {
-            exactScrollRight = colRight.scrollTop; // Sinkronisasi saat manual scroll
-        }
-        
         requestAnimationFrame(autoScroll);
     }
     autoScroll();
 
     // 2. FUNGSI SEAMLESS LOOP & MANUAL SCROLL
-    function setupColumnScroll(element, segmentHeight) {
+    function setupColumnScroll(element, getSegmentObj) {
         element.addEventListener('scroll', () => {
             if (element.isInteracting) {
-                // Hysteresis yang aman: memberikan toleransi area sangat luas agar tak menabrak 0 atau akhir batas scroll
-                if (element.scrollTop >= 2.5 * segmentHeight) {
-                    element.scrollTop -= segmentHeight; 
-                } 
-                else if (element.scrollTop <= 0.5 * segmentHeight) {
-                    element.scrollTop += segmentHeight; 
+                let seg = getSegmentObj();
+                if (isMobile) {
+                    if (element.scrollLeft >= 2.5 * seg.x) element.scrollLeft -= seg.x;
+                    else if (element.scrollLeft <= 0.5 * seg.x) element.scrollLeft += seg.x;
+                } else {
+                    if (element.scrollTop >= 2.5 * seg.y) element.scrollTop -= seg.y;
+                    else if (element.scrollTop <= 0.5 * seg.y) element.scrollTop += seg.y;
                 }
             }
         });
 
-        let scrollTimeout; // Timer dipindah ke sini agar independen per kolom
-
-        // Deteksi interaksi mouse (wheel) & usapan HP (touchmove) supaya auto-scroll berhenti sesaat
+        let scrollTimeout;
         const stopAutoScroll = () => {
             element.isInteracting = true; 
             clearTimeout(scrollTimeout);
@@ -87,6 +124,6 @@ window.addEventListener('load', () => {
         element.addEventListener('touchmove', stopAutoScroll, { passive: true });
     }
 
-    setupColumnScroll(colLeft, segmentHeightLeft);
-    setupColumnScroll(colRight, segmentHeightRight);
+    setupColumnScroll(colLeft, () => segmentLeft);
+    setupColumnScroll(colRight, () => segmentRight);
 });

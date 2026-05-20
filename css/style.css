@@ -1,8 +1,9 @@
 body {
     background-color: white;
     display: flex;
-    flex-wrap: wrap; 
-    gap: 80px; 
+    flex-wrap: nowrap; /* Mencegah galeri jatuh ke bawah pada layar laptop (ukuran nanggung) */
+    gap: 5vw; /* Jarak dinamis menyesuaikan lebar layar (bukan lagi fix 80px) */
+    padding: 0 4vw; /* Tambahan ruang aman di kiri-kanan agar tidak mentok tepi browser */
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
@@ -65,8 +66,8 @@ body {
 .showcase {
     display: flex;
     gap: 40px; 
-    /* UBAH: Perlebar ukuran showcase menjadi 800px agar lingkaran 300px beserta bayangannya tidak terpotong */
-    width: 800px; 
+    /* UBAH: Gunakan ukuran otomatis (tidak kaku 800px) agar bisa mengecil mulus di laptop */
+    width: auto; 
     height: 100vh; 
     overflow: hidden; 
     position: relative;
@@ -144,4 +145,55 @@ body {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-10px); }
     100% { transform: translateY(0); }
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT (Khusus Layar HP / Mobile)
+========================================= */
+@media (max-width: 1420px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        padding: 40px 0; /* Padding kiri-kanan dihapus agar slideshow menyentuh ujung layar */
+        gap: 15px; 
+        height: auto;
+        align-items: center;
+    }
+
+    /* Membongkar wrapper agar anak-anaknya bisa diatur urutannya secara fleksibel */
+    .card, .showcase {
+        display: contents; 
+    }
+
+    /* Mengatur urutan (Order) tumpukan elemen dari atas ke bawah */
+    .logo { order: 1; }
+    .title { order: 2; text-align: center; padding: 0 20px; font-size: 28px; }
+    .separator { order: 3; width: 80px; margin: 10px 0; }
+    #col-left { order: 4; } /* Baris Slideshow 1 (Kiri ke Kanan) */
+    .description { order: 5; text-align: center; padding: 0 20px; margin: 15px 0; }
+    #col-right { order: 6; } /* Baris Slideshow 2 (Kanan ke Kiri) */
+
+    /* Mengubah Kolom Vertikal menjadi Baris Horizontal */
+    .column {
+        width: 100vw;
+        height: auto;
+        overflow-x: scroll; /* Scroll menyamping */
+        overflow-y: hidden; /* Matikan scroll vertikal */
+        padding: 20px 0; /* Memberikan ruang bayangan (shadow) atas bawah */
+        flex: none; /* Lepas dari aturan flex desktop */
+    }
+
+    .col-track {
+        flex-direction: row; /* Jejerkan lingkaran menyamping */
+        width: max-content; /* Biarkan trek melebar sejauh isinya */
+        gap: 4vw; /* Jarak antar lingkaran */
+        padding: 0;
+    }
+
+    .circle {
+        width: 35vw; 
+        height: 35vw; 
+        max-width: 150px; 
+        max-height: 150px;
+    }
 }
