@@ -103,7 +103,7 @@ body {
     /* TAMBAHAN: Pastikan lingkaran berada tepat di tengah kolom agar tidak menabrak pinggiran */
     align-items: center; 
     gap: 3vh; /* Jarak proporsional yang pas untuk 4 gambar (4*3 = 12vh) */
-    padding: 0;
+    padding: 0 0 3vh 0; /* Tambah padding bawah sebesar gap agar kalkulasi infinite loop akurat */
     background: none;
 }
 
@@ -119,7 +119,7 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     
     /* Efek floating agar tetap terasa 'hidup' (bernapas) */
-    animation: float 5s ease-in-out infinite; 
+    animation: float-horizontal 5s ease-in-out infinite; 
     
     /* FIX 1 & 4: Optimasi rendering dengan will-change, memastikan transparency */
     background: transparent;
@@ -140,11 +140,11 @@ body {
     pointer-events: none; /* Penting! Mencegah gambar error terseret (native browser drag) saat menggunakan kursor mouse */
 }
 
-/* Animasi Keyframes Floating (Tetap dipertahankan) */
-@keyframes float {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0); }
+/* Animasi Keyframes Floating Horizontal (Untuk PC) */
+@keyframes float-horizontal {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
 }
 
 /* =========================================
@@ -187,7 +187,7 @@ body {
         flex-direction: row; /* Jejerkan lingkaran menyamping */
         width: max-content; /* Biarkan trek melebar sejauh isinya */
         gap: 4vw; /* Jarak antar lingkaran */
-        padding: 0;
+        padding: 0 4vw 0 0; /* Tambah padding kanan sebesar gap agar kalkulasi infinite loop akurat */
     }
 
     .circle {
@@ -195,5 +195,14 @@ body {
         height: 35vw; 
         max-width: 150px; 
         max-height: 150px;
+        /* Kembalikan ke animasi naik-turun untuk Mobile */
+        animation: float-vertical 5s ease-in-out infinite;
+    }
+
+    /* Animasi Keyframes Floating Vertikal (Untuk HP) */
+    @keyframes float-vertical {
+        0%   { transform: translateY(0); }
+        50%  { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
     }
 }

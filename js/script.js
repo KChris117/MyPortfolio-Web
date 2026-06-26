@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     function duplicateContent(column) {
         const track = column.querySelector('.col-track');
         const children = Array.from(track.children);
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 7; i++) {
             children.forEach(child => {
                 track.appendChild(child.cloneNode(true));
             });
@@ -21,10 +21,10 @@ window.addEventListener('load', () => {
 
     // Mengukur panjang/lebar 1 set (1 segment) secara akurat dari 4 set yang ada
     function updateSegments() {
-        segmentLeft.x = colLeft.querySelector('.col-track').scrollWidth / 4;
-        segmentLeft.y = colLeft.querySelector('.col-track').scrollHeight / 4;
-        segmentRight.x = colRight.querySelector('.col-track').scrollWidth / 4;
-        segmentRight.y = colRight.querySelector('.col-track').scrollHeight / 4;
+        segmentLeft.x = colLeft.querySelector('.col-track').scrollWidth / 8;
+        segmentLeft.y = colLeft.querySelector('.col-track').scrollHeight / 8;
+        segmentRight.x = colRight.querySelector('.col-track').scrollWidth / 8;
+        segmentRight.y = colRight.querySelector('.col-track').scrollHeight / 8;
     }
 
     updateSegments();
@@ -32,10 +32,10 @@ window.addEventListener('load', () => {
     let isMobile = window.innerWidth <= 1420;
 
     // Atur posisi awal di tengah (zona aman)
-    colLeft.scrollTop = 1.5 * segmentLeft.y;
-    colRight.scrollTop = 1.5 * segmentRight.y;
-    colLeft.scrollLeft = 1.5 * segmentLeft.x;
-    colRight.scrollLeft = 1.5 * segmentRight.x;
+    colLeft.scrollTop = 3.5 * segmentLeft.y;
+    colRight.scrollTop = 3.5 * segmentRight.y;
+    colLeft.scrollLeft = 3.5 * segmentLeft.x;
+    colRight.scrollLeft = 3.5 * segmentRight.x;
 
     let exactScrollLeft = isMobile ? colLeft.scrollLeft : colLeft.scrollTop;
     let exactScrollRight = isMobile ? colRight.scrollLeft : colRight.scrollTop;
@@ -47,12 +47,12 @@ window.addEventListener('load', () => {
         updateSegments();
         
         if (wasMobile !== isMobile) {
-            exactScrollLeft = isMobile ? 1.5 * segmentLeft.x : 1.5 * segmentLeft.y;
-            exactScrollRight = isMobile ? 1.5 * segmentRight.x : 1.5 * segmentRight.y;
-            colLeft.scrollTop = 1.5 * segmentLeft.y;
-            colLeft.scrollLeft = 1.5 * segmentLeft.x;
-            colRight.scrollTop = 1.5 * segmentRight.y;
-            colRight.scrollLeft = 1.5 * segmentRight.x;
+            exactScrollLeft = isMobile ? 3.5 * segmentLeft.x : 3.5 * segmentLeft.y;
+            exactScrollRight = isMobile ? 3.5 * segmentRight.x : 3.5 * segmentRight.y;
+            colLeft.scrollTop = 3.5 * segmentLeft.y;
+            colLeft.scrollLeft = 3.5 * segmentLeft.x;
+            colRight.scrollTop = 3.5 * segmentRight.y;
+            colRight.scrollLeft = 3.5 * segmentRight.x;
         }
     });
 
@@ -66,14 +66,14 @@ window.addEventListener('load', () => {
             // Baris 1: Kiri ke Kanan (scrollLeft berkurang)
             if (!colLeft.isInteracting) {
                 exactScrollLeft -= 1.5;
-                if (exactScrollLeft <= 0.5 * segmentLeft.x) exactScrollLeft += segmentLeft.x;
+                if (exactScrollLeft <= 2.5 * segmentLeft.x) exactScrollLeft += segmentLeft.x;
                 colLeft.scrollLeft = exactScrollLeft;
             } else exactScrollLeft = colLeft.scrollLeft;
 
             // Baris 2: Kanan ke Kiri (scrollLeft bertambah)
             if (!colRight.isInteracting) {
                 exactScrollRight += 1.5;
-                if (exactScrollRight >= 2.5 * segmentRight.x) exactScrollRight -= segmentRight.x;
+                if (exactScrollRight >= 4.5 * segmentRight.x) exactScrollRight -= segmentRight.x;
                 colRight.scrollLeft = exactScrollRight;
             } else exactScrollRight = colRight.scrollLeft;
         } else {
@@ -81,14 +81,14 @@ window.addEventListener('load', () => {
             // Kolom Kiri: Bawah ke Atas (scrollTop bertambah)
             if (!colLeft.isInteracting) {
                 exactScrollLeft += 1.5; 
-                if (exactScrollLeft >= 2.5 * segmentLeft.y) exactScrollLeft -= segmentLeft.y;
+                if (exactScrollLeft >= 4.5 * segmentLeft.y) exactScrollLeft -= segmentLeft.y;
                 colLeft.scrollTop = exactScrollLeft;
             } else exactScrollLeft = colLeft.scrollTop;
             
             // Kolom Kanan: Atas ke Bawah (scrollTop berkurang)
             if (!colRight.isInteracting) {
                 exactScrollRight -= 1.5; 
-                if (exactScrollRight <= 0.5 * segmentRight.y) exactScrollRight += segmentRight.y;
+                if (exactScrollRight <= 2.5 * segmentRight.y) exactScrollRight += segmentRight.y;
                 colRight.scrollTop = exactScrollRight;
             } else exactScrollRight = colRight.scrollTop;
         }
@@ -102,11 +102,11 @@ window.addEventListener('load', () => {
             if (element.isInteracting) {
                 let seg = getSegmentObj();
                 if (isMobile) {
-                    if (element.scrollLeft >= 2.5 * seg.x) element.scrollLeft -= seg.x;
-                    else if (element.scrollLeft <= 0.5 * seg.x) element.scrollLeft += seg.x;
+                    if (element.scrollLeft >= 4.5 * seg.x) element.scrollLeft -= seg.x;
+                    else if (element.scrollLeft <= 2.5 * seg.x) element.scrollLeft += seg.x;
                 } else {
-                    if (element.scrollTop >= 2.5 * seg.y) element.scrollTop -= seg.y;
-                    else if (element.scrollTop <= 0.5 * seg.y) element.scrollTop += seg.y;
+                    if (element.scrollTop >= 4.5 * seg.y) element.scrollTop -= seg.y;
+                    else if (element.scrollTop <= 2.5 * seg.y) element.scrollTop += seg.y;
                 }
             }
         });
