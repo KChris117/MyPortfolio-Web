@@ -110,8 +110,8 @@ body {
 /* Ukuran dan bentuk lingkaran dibuat SAMA SEMUA */
 .circle {
     /* --- UBAH UKURAN LINGKARAN DI SINI --- */
-    width: 22vh; /* Diperkecil agar murni muat 4 gambar (4*22 = 88vh) */
-    height: 22vh;
+    width: 28vh; /* Diperbesar karena sekarang hanya 3 gambar (3*28 = 84vh) */
+    height: 28vh;
     /* -------------------------------------- */
     border-radius: 50%;
     overflow: hidden;

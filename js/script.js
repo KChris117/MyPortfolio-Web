@@ -139,14 +139,56 @@ window.addEventListener('load', () => {
     const closeModal = document.getElementById('close-modal');
     const modalImg = document.getElementById('modal-img');
     const modalTitle = document.getElementById('modal-title');
+    const modalGallery = modal.querySelector('.modal-gallery');
+
+    // WADAH DATA GAMBAR G-DRIVE (Nanti link-linknya akan dimasukkan ke sini)
+    const projectGalleries = {
+        "Project 1": [
+            // "https://lh3.googleusercontent.com/d/ID_GAMBAR_1",
+        ],
+        "Project 2": [],
+        "Project 3": [],
+        "Project 4": [],
+        "Project 5": [],
+        "Project 6": []
+    };
+
+    // Fungsi helper untuk mengekstrak ID dari link GDrive dan merubahnya ke format lh3
+    function formatDriveLink(url) {
+        if (!url) return "";
+        const match = url.match(/id=([^&]+)/);
+        if (match && match[1]) {
+            return "https://lh3.googleusercontent.com/d/" + match[1];
+        }
+        return url; // Jika formatnya berbeda, biarkan apa adanya
+    }
 
     // Menambahkan event listener ke semua circle (termasuk yang di-clone)
     document.querySelectorAll('.circle').forEach((circle) => {
         circle.addEventListener('click', () => {
             const img = circle.querySelector('img');
+            const projectName = img.alt; // Mengambil nama "Project 1", dll dari alt
+
             modalImg.src = img.src;
-            modalTitle.innerText = "Project Detail " + img.alt;
+            modalTitle.innerText = projectName;
             
+            // Render isi Gallery
+            modalGallery.innerHTML = ''; // Kosongkan gallery sebelumnya
+            const images = projectGalleries[projectName] || [];
+            
+            if (images.length === 0) {
+                // Tampilan default jika belum ada gambar
+                modalGallery.innerHTML = '<p style="padding: 20px; color: #666; font-family: sans-serif;">Gambar detail sedang disiapkan...</p>';
+            } else {
+                images.forEach(link => {
+                    const imgEl = document.createElement('img');
+                    imgEl.src = formatDriveLink(link);
+                    imgEl.alt = projectName + " Detail";
+                    modalGallery.appendChild(imgEl);
+                });
+            }
+            
+            // Tampilkan Modal
             modal.classList.add('active');
             isModalOpen = true;
         });
