@@ -59,8 +59,15 @@ window.addEventListener('load', () => {
     colLeft.isInteracting = false;
     colRight.isInteracting = false;
 
+    let isModalOpen = false;
+
     // 1. FUNGSI SLIDESHOW OTOMATIS (Mendukung Vertikal PC & Horizontal HP)
     function autoScroll() {
+        if (isModalOpen) {
+            requestAnimationFrame(autoScroll);
+            return;
+        }
+
         if (isMobile) {
             // HP: HORIZONTAL SLIDESHOW
             // Baris 1: Kiri ke Kanan (scrollLeft berkurang)
@@ -126,4 +133,36 @@ window.addEventListener('load', () => {
 
     setupColumnScroll(colLeft, () => segmentLeft);
     setupColumnScroll(colRight, () => segmentRight);
+
+    // 3. FUNGSI MODAL DETAIL
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalImg = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+
+    // Menambahkan event listener ke semua circle (termasuk yang di-clone)
+    document.querySelectorAll('.circle').forEach((circle) => {
+        circle.addEventListener('click', () => {
+            const img = circle.querySelector('img');
+            modalImg.src = img.src;
+            modalTitle.innerText = "Project Detail " + img.alt;
+            
+            modal.classList.add('active');
+            isModalOpen = true;
+        });
+    });
+
+    // Menutup modal dengan tombol X
+    closeModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+        isModalOpen = false;
+    });
+
+    // Menutup modal jika area di luar konten diklik
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            isModalOpen = false;
+        }
+    });
 });
