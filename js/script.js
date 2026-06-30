@@ -242,7 +242,11 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/1DL7QzXeGhDY4tZlpto6omLllppoAk_Ij/view?usp=sharing",
             "https://drive.google.com/file/d/1ubnKMkQKj6Heax3a4NR5w1JcZuIFi8x3/view?usp=sharing"
         ],
-        "Project 2": [],
+        "1st Symphony": [
+            "https://drive.google.com/file/d/1ELaao-S8mgKLA0wbKJjKaah7bXilprCY/view?usp=sharing",
+            "https://drive.google.com/file/d/15gKWUoeyFCJWY5-N2DxJc_J56uw7DL7V/view?usp=sharing",
+            "https://drive.google.com/file/d/1DKKz6XjZy7l-2zPXHeFeXXsxt3mHaNPM/view?usp=sharing"
+        ],
         "Project 3": [],
         "Project 4": [],
         "Project 5": [],
@@ -252,7 +256,7 @@ window.addEventListener('load', () => {
     // WADAH DESKRIPSI PROJECT
     const projectDescriptions = {
         "O'Cos (Online Cosmetic)": "<strong>What is O’Cos?</strong><br>O’Cos is an exclusive e-commerce platform operating in the cosmetics sector. We provide all your premium beauty product needs from skincare, lipsticks, makeup, and much more. Discover the best version of yourself with O'Cos.",
-        "Project 2": "Deskripsi untuk Project 2 belum tersedia. Segera lengkapi data ini.",
+        "1st Symphony": "<strong>Your Gateway to Unforgettable Concerts</strong><br>Welcome to 1st Symphony, your go-to destination for purchasing music concert tickets online! Browse our wide selection of concerts, from rock to pop to jazz, and secure your tickets with ease.",
         "Project 3": "Deskripsi untuk Project 3 belum tersedia. Segera lengkapi data ini.",
         "Project 4": "Deskripsi untuk Project 4 belum tersedia. Segera lengkapi data ini.",
         "Project 5": "Deskripsi untuk Project 5 belum tersedia. Segera lengkapi data ini.",
@@ -262,7 +266,7 @@ window.addEventListener('load', () => {
     // WADAH LINK PROJECT (File HTML Detail)
     const projectLinks = {
         "O'Cos (Online Cosmetic)": "o_cos.html",
-        "Project 2": "#",
+        "1st Symphony": "1st_symphony.html",
         "Project 3": "#",
         "Project 4": "#",
         "Project 5": "#",
