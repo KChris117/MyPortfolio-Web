@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     function duplicateContent(column) {
         const track = column.querySelector('.col-track');
         const children = Array.from(track.children);
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < 5; i++) { // Mengurangi clone dari 7 menjadi 5 (Total 6 set) untuk performa DOM
             children.forEach(child => {
                 track.appendChild(child.cloneNode(true));
             });
@@ -21,10 +21,10 @@ window.addEventListener('load', () => {
 
     // Mengukur panjang/lebar 1 set (1 segment) secara akurat dari 4 set yang ada
     function updateSegments() {
-        segmentLeft.x = colLeft.querySelector('.col-track').scrollWidth / 8;
-        segmentLeft.y = colLeft.querySelector('.col-track').scrollHeight / 8;
-        segmentRight.x = colRight.querySelector('.col-track').scrollWidth / 8;
-        segmentRight.y = colRight.querySelector('.col-track').scrollHeight / 8;
+        segmentLeft.x = colLeft.querySelector('.col-track').scrollWidth / 6;
+        segmentLeft.y = colLeft.querySelector('.col-track').scrollHeight / 6;
+        segmentRight.x = colRight.querySelector('.col-track').scrollWidth / 6;
+        segmentRight.y = colRight.querySelector('.col-track').scrollHeight / 6;
     }
 
     updateSegments();
@@ -32,10 +32,10 @@ window.addEventListener('load', () => {
     let isMobile = window.innerWidth <= 1420;
 
     // Atur posisi awal di tengah (zona aman)
-    colLeft.scrollTop = 3.5 * segmentLeft.y;
-    colRight.scrollTop = 3.5 * segmentRight.y;
-    colLeft.scrollLeft = 3.5 * segmentLeft.x;
-    colRight.scrollLeft = 3.5 * segmentRight.x;
+    colLeft.scrollTop = 2.5 * segmentLeft.y;
+    colRight.scrollTop = 2.5 * segmentRight.y;
+    colLeft.scrollLeft = 2.5 * segmentLeft.x;
+    colRight.scrollLeft = 2.5 * segmentRight.x;
 
     let exactScrollLeft = isMobile ? colLeft.scrollLeft : colLeft.scrollTop;
     let exactScrollRight = isMobile ? colRight.scrollLeft : colRight.scrollTop;
@@ -47,12 +47,12 @@ window.addEventListener('load', () => {
         updateSegments();
         
         if (wasMobile !== isMobile) {
-            exactScrollLeft = isMobile ? 3.5 * segmentLeft.x : 3.5 * segmentLeft.y;
-            exactScrollRight = isMobile ? 3.5 * segmentRight.x : 3.5 * segmentRight.y;
-            colLeft.scrollTop = 3.5 * segmentLeft.y;
-            colLeft.scrollLeft = 3.5 * segmentLeft.x;
-            colRight.scrollTop = 3.5 * segmentRight.y;
-            colRight.scrollLeft = 3.5 * segmentRight.x;
+            exactScrollLeft = isMobile ? 2.5 * segmentLeft.x : 2.5 * segmentLeft.y;
+            exactScrollRight = isMobile ? 2.5 * segmentRight.x : 2.5 * segmentRight.y;
+            colLeft.scrollTop = 2.5 * segmentLeft.y;
+            colLeft.scrollLeft = 2.5 * segmentLeft.x;
+            colRight.scrollTop = 2.5 * segmentRight.y;
+            colRight.scrollLeft = 2.5 * segmentRight.x;
         }
     });
 
@@ -73,14 +73,14 @@ window.addEventListener('load', () => {
             // Baris 1: Kiri ke Kanan (scrollLeft berkurang)
             if (!colLeft.isInteracting) {
                 exactScrollLeft -= 1.5;
-                if (exactScrollLeft <= 2.5 * segmentLeft.x) exactScrollLeft += segmentLeft.x;
+                if (exactScrollLeft <= 1.5 * segmentLeft.x) exactScrollLeft += segmentLeft.x;
                 colLeft.scrollLeft = exactScrollLeft;
             } else exactScrollLeft = colLeft.scrollLeft;
 
             // Baris 2: Kanan ke Kiri (scrollLeft bertambah)
             if (!colRight.isInteracting) {
                 exactScrollRight += 1.5;
-                if (exactScrollRight >= 4.5 * segmentRight.x) exactScrollRight -= segmentRight.x;
+                if (exactScrollRight >= 3.5 * segmentRight.x) exactScrollRight -= segmentRight.x;
                 colRight.scrollLeft = exactScrollRight;
             } else exactScrollRight = colRight.scrollLeft;
         } else {
@@ -88,14 +88,14 @@ window.addEventListener('load', () => {
             // Kolom Kiri: Bawah ke Atas (scrollTop bertambah)
             if (!colLeft.isInteracting) {
                 exactScrollLeft += 1.5; 
-                if (exactScrollLeft >= 4.5 * segmentLeft.y) exactScrollLeft -= segmentLeft.y;
+                if (exactScrollLeft >= 3.5 * segmentLeft.y) exactScrollLeft -= segmentLeft.y;
                 colLeft.scrollTop = exactScrollLeft;
             } else exactScrollLeft = colLeft.scrollTop;
             
             // Kolom Kanan: Atas ke Bawah (scrollTop berkurang)
             if (!colRight.isInteracting) {
                 exactScrollRight -= 1.5; 
-                if (exactScrollRight <= 2.5 * segmentRight.y) exactScrollRight += segmentRight.y;
+                if (exactScrollRight <= 1.5 * segmentRight.y) exactScrollRight += segmentRight.y;
                 colRight.scrollTop = exactScrollRight;
             } else exactScrollRight = colRight.scrollTop;
         }
@@ -109,11 +109,11 @@ window.addEventListener('load', () => {
             if (element.isInteracting) {
                 let seg = getSegmentObj();
                 if (isMobile) {
-                    if (element.scrollLeft >= 4.5 * seg.x) element.scrollLeft -= seg.x;
-                    else if (element.scrollLeft <= 2.5 * seg.x) element.scrollLeft += seg.x;
+                    if (element.scrollLeft >= 3.5 * seg.x) element.scrollLeft -= seg.x;
+                    else if (element.scrollLeft <= 1.5 * seg.x) element.scrollLeft += seg.x;
                 } else {
-                    if (element.scrollTop >= 4.5 * seg.y) element.scrollTop -= seg.y;
-                    else if (element.scrollTop <= 2.5 * seg.y) element.scrollTop += seg.y;
+                    if (element.scrollTop >= 3.5 * seg.y) element.scrollTop -= seg.y;
+                    else if (element.scrollTop <= 1.5 * seg.y) element.scrollTop += seg.y;
                 }
             }
         });
@@ -134,17 +134,113 @@ window.addEventListener('load', () => {
     setupColumnScroll(colLeft, () => segmentLeft);
     setupColumnScroll(colRight, () => segmentRight);
 
-    // 3. FUNGSI MODAL DETAIL
+    // 3. FUNGSI MODAL DETAIL & LIGHTBOX
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('close-modal');
     const modalImg = document.getElementById('modal-img');
     const modalTitle = document.getElementById('modal-title');
     const modalGallery = modal.querySelector('.modal-gallery');
+    
+    // Elemen Gallery Buttons
+    const galleryPrev = document.getElementById('gallery-prev');
+    const galleryNext = document.getElementById('gallery-next');
+
+    if (galleryPrev && galleryNext) {
+        galleryPrev.addEventListener('click', () => {
+            modalGallery.scrollBy({ left: -modalGallery.clientWidth, behavior: 'smooth' });
+        });
+        galleryNext.addEventListener('click', () => {
+            modalGallery.scrollBy({ left: modalGallery.clientWidth, behavior: 'smooth' });
+        });
+    }
+
+    // Elemen Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    // Variabel state untuk Pan & Zoom
+    let lbScale = 1;
+    let lbX = 0;
+    let lbY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function updateLightboxTransform() {
+        lightboxImg.style.transform = `translate3d(${lbX}px, ${lbY}px, 0) scale(${lbScale})`;
+    }
+
+    // Tutup Lightbox saat diklik di area luar gambar
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            // Buat transisi penutupan lebih cepat agar tidak terasa berat
+            lightboxImg.style.transition = 'transform 0.25s ease-out';
+            lightbox.classList.remove('active');
+            
+            // Reset posisi untuk animasi zoom out ke posisi semula
+            lbScale = 0.8;
+            lbX = 0;
+            lbY = 0;
+            updateLightboxTransform();
+            
+            // Bersihkan sisa transform dan kembalikan blur modal setelah transisi selesai
+            setTimeout(() => {
+                lightboxImg.style.transition = '';
+                lightboxImg.style.transform = '';
+                modal.style.backdropFilter = ''; // Pindahkan ke sini agar tidak membebani GPU saat animasi berjalan
+            }, 250);
+        }
+    });
+
+    // Fitur Zoom dengan Scroll Mouse
+    lightbox.addEventListener('wheel', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        e.preventDefault(); // Matikan scroll halaman bawaan
+        
+        lightboxImg.style.transition = 'none'; // Matikan transisi agar responsif dan ringan (0 lag)
+        
+        const zoomSpeed = 0.15;
+        if (e.deltaY < 0) lbScale += zoomSpeed; // Scroll atas = membesar
+        else lbScale -= zoomSpeed; // Scroll bawah = mengecil
+        
+        lbScale = Math.max(0.3, Math.min(lbScale, 5)); // Batas zoom 0.3x sampai 5x
+        requestAnimationFrame(updateLightboxTransform);
+    }, { passive: false });
+
+    // Fitur Geser (Panning) dengan Klik Kanan
+    lightbox.addEventListener('contextmenu', e => e.preventDefault()); // Matikan popup klik kanan browser
+    
+    lightbox.addEventListener('mousedown', (e) => {
+        if (e.button === 2 && lightbox.classList.contains('active')) { // 2 = Klik Kanan
+            isDragging = true;
+            lightboxImg.style.transition = 'none'; // Instan tanpa transisi
+            lightbox.style.cursor = 'grabbing';
+            startX = e.clientX - lbX;
+            startY = e.clientY - lbY;
+        }
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        lbX = e.clientX - startX;
+        lbY = e.clientY - startY;
+        requestAnimationFrame(updateLightboxTransform);
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (e.button === 2 && isDragging) {
+            isDragging = false;
+            lightbox.style.cursor = 'default';
+        }
+    });
 
     // WADAH DATA GAMBAR G-DRIVE (Nanti link-linknya akan dimasukkan ke sini)
     const projectGalleries = {
-        "Project 1": [
-            // "https://lh3.googleusercontent.com/d/ID_GAMBAR_1",
+        "O'Cos (Online Cosmetic)": [
+            "https://drive.google.com/file/d/1y1Uf0J0S6ufhTFN5hQq5v8ybBotOa-Lf/view?usp=sharing",
+            "https://drive.google.com/file/d/1DL7QzXeGhDY4tZlpto6omLllppoAk_Ij/view?usp=sharing",
+            "https://drive.google.com/file/d/1ubnKMkQKj6Heax3a4NR5w1JcZuIFi8x3/view?usp=sharing"
         ],
         "Project 2": [],
         "Project 3": [],
@@ -153,12 +249,44 @@ window.addEventListener('load', () => {
         "Project 6": []
     };
 
+    // WADAH DESKRIPSI PROJECT
+    const projectDescriptions = {
+        "O'Cos (Online Cosmetic)": "<strong>What is O’Cos?</strong><br>O’Cos is an exclusive e-commerce platform operating in the cosmetics sector. We provide all your premium beauty product needs from skincare, lipsticks, makeup, and much more. Discover the best version of yourself with O'Cos.",
+        "Project 2": "Deskripsi untuk Project 2 belum tersedia. Segera lengkapi data ini.",
+        "Project 3": "Deskripsi untuk Project 3 belum tersedia. Segera lengkapi data ini.",
+        "Project 4": "Deskripsi untuk Project 4 belum tersedia. Segera lengkapi data ini.",
+        "Project 5": "Deskripsi untuk Project 5 belum tersedia. Segera lengkapi data ini.",
+        "Project 6": "Deskripsi untuk Project 6 belum tersedia. Segera lengkapi data ini."
+    };
+
+    // WADAH LINK PROJECT (File HTML Detail)
+    const projectLinks = {
+        "O'Cos (Online Cosmetic)": "o_cos.html",
+        "Project 2": "#",
+        "Project 3": "#",
+        "Project 4": "#",
+        "Project 5": "#",
+        "Project 6": "#"
+    };
+
     // Fungsi helper untuk mengekstrak ID dari link GDrive dan merubahnya ke format lh3
     function formatDriveLink(url) {
         if (!url) return "";
-        const match = url.match(/id=([^&]+)/);
-        if (match && match[1]) {
-            return "https://lh3.googleusercontent.com/d/" + match[1];
+        let fileId = "";
+        
+        // Cek format 1: ?id=...
+        const match1 = url.match(/id=([^&]+)/);
+        if (match1 && match1[1]) fileId = match1[1];
+        
+        // Cek format 2: /file/d/...
+        if (!fileId) {
+            const match2 = url.match(/\/file\/d\/([^\/]+)/);
+            if (match2 && match2[1]) fileId = match2[1];
+        }
+        
+        if (fileId) {
+            // Kita gunakan =w1600 agar gambar di dalam gallery tidak pecah/blur saat ditampilkan di layar besar
+            return "https://lh3.googleusercontent.com/d/" + fileId + "=w1600";
         }
         return url; // Jika formatnya berbeda, biarkan apa adanya
     }
@@ -167,10 +295,18 @@ window.addEventListener('load', () => {
     document.querySelectorAll('.circle').forEach((circle) => {
         circle.addEventListener('click', () => {
             const img = circle.querySelector('img');
-            const projectName = img.alt; // Mengambil nama "Project 1", dll dari alt
+            const projectName = img.alt; // Mengambil nama "O'Cos (Online Cosmetic)", dll dari alt
 
             modalImg.src = img.src;
             modalTitle.innerText = projectName;
+            
+            // Render Deskripsi
+            const modalDesc = document.getElementById('modal-desc');
+            modalDesc.innerHTML = projectDescriptions[projectName] || "Deskripsi belum tersedia.";
+
+            // Render Link Button
+            const btnView = modal.querySelector('.btn-view');
+            btnView.href = projectLinks[projectName] || "#";
             
             // Render isi Gallery
             modalGallery.innerHTML = ''; // Kosongkan gallery sebelumnya
@@ -184,6 +320,31 @@ window.addEventListener('load', () => {
                     const imgEl = document.createElement('img');
                     imgEl.src = formatDriveLink(link);
                     imgEl.alt = projectName + " Detail";
+                    imgEl.style.cursor = 'pointer'; // Ganti ke icon tangan sesuai permintaan
+                    
+                    // Fitur klik untuk preview
+                    imgEl.addEventListener('click', () => {
+                        // Trik UX: Gunakan versi ringan (yang sudah dimuat) agar animasi muncul seketika (0 lag)
+                        lightboxImg.src = imgEl.src;
+                        
+                        // Muat versi HD asli di belakang layar tanpa mengganggu jalannya animasi CSS
+                        let originalResLink = imgEl.src.replace('=w1600', '');
+                        const tempImg = new Image();
+                        tempImg.onload = () => {
+                            if (lightbox.classList.contains('active')) lightboxImg.src = originalResLink;
+                        };
+                        tempImg.src = originalResLink;
+                        
+                        // Bersihkan sisa state dari sesi sebelumnya agar CSS awal mengambil alih (zoom in pop effect)
+                        lbScale = 1; lbX = 0; lbY = 0;
+                        lightboxImg.style.transition = '';
+                        lightboxImg.style.transform = '';
+                        
+                        // FIX GPU LAG: Matikan blur modal selagi lightbox terbuka karena tumpukan 2 blur sangat berat
+                        modal.style.backdropFilter = 'none';
+                        lightbox.classList.add('active');
+                    });
+                    
                     modalGallery.appendChild(imgEl);
                 });
             }

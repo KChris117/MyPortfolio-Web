@@ -18,17 +18,17 @@
         
         <div class="column col-left" id="col-left">
             <div class="col-track">
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1j1df6nK2fKvgroDFjQxZzMjFDQyIzoTC" alt="Project 1"></div>
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1KY1vLnfsEG50xDkUcnB9O4bTou7oVToi" alt="Project 2"></div>
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/10MbkN6c8nm1miRMu7Nw1lhVb3x4n5jsC" alt="Project 3"></div>
+                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1j1df6nK2fKvgroDFjQxZzMjFDQyIzoTC=w400" alt="O'Cos (Online Cosmetic)"></div>
+                <div class="circle delay-anim"><img src="https://lh3.googleusercontent.com/d/1KY1vLnfsEG50xDkUcnB9O4bTou7oVToi=w400" alt="Project 2"></div>
+                <div class="circle"><img src="https://lh3.googleusercontent.com/d/10MbkN6c8nm1miRMu7Nw1lhVb3x4n5jsC=w400" alt="Project 3"></div>
             </div>
         </div>
 
         <div class="column col-right" id="col-right">
             <div class="col-track">
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1dqaOGLgstilj--o_2Ys7iy-_TyzSXzeb" alt="Project 4"></div>
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1Cb17ez52udEkftXNc43Jfutn4jkslOlP" alt="Project 5"></div>
-                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1sNGp2TMGypjFxG3CYkjVSkrVNpBWplRY" alt="Project 6"></div>
+                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1dqaOGLgstilj--o_2Ys7iy-_TyzSXzeb=w400" alt="Project 4"></div>
+                <div class="circle delay-anim"><img src="https://lh3.googleusercontent.com/d/1Cb17ez52udEkftXNc43Jfutn4jkslOlP=w400" alt="Project 5"></div>
+                <div class="circle"><img src="https://lh3.googleusercontent.com/d/1sNGp2TMGypjFxG3CYkjVSkrVNpBWplRY=w400" alt="Project 6"></div>
             </div>
         </div>
 
@@ -46,10 +46,14 @@
                 <h2 id="modal-title">Project Title</h2>
             </div>
             
-            <div class="modal-gallery">
-                <img src="https://picsum.photos/800/450?random=21" alt="UI/UX 1">
-                <img src="https://picsum.photos/800/450?random=22" alt="UI/UX 2">
-                <img src="https://picsum.photos/800/450?random=23" alt="UI/UX 3">
+            <div class="modal-gallery-wrapper">
+                <button class="gallery-btn prev-btn" id="gallery-prev">❮</button>
+                <div class="modal-gallery">
+                    <img src="https://picsum.photos/800/450?random=21" alt="UI/UX 1">
+                    <img src="https://picsum.photos/800/450?random=22" alt="UI/UX 2">
+                    <img src="https://picsum.photos/800/450?random=23" alt="UI/UX 3">
+                </div>
+                <button class="gallery-btn next-btn" id="gallery-next">❯</button>
             </div>
 
             <div class="modal-info">
@@ -57,6 +61,11 @@
                 <a href="#" class="btn-view">View Full Project</a>
             </div>
         </div>
+    </div>
+
+    <!-- Lightbox Preview -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" src="" alt="Preview">
     </div>
 
     <script src="js/script.js"></script>
