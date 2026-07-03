@@ -243,11 +243,15 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/1ubnKMkQKj6Heax3a4NR5w1JcZuIFi8x3/view?usp=sharing"
         ],
         "1st Symphony": [
-            "https://drive.google.com/file/d/1ELaao-S8mgKLA0wbKJjKaah7bXilprCY/view?usp=sharing",
+            "https://drive.google.com/file/d/1rzcoSJRonyyX-H9tCE_EyI6LFRMRXary/view?usp=sharing",
             "https://drive.google.com/file/d/15gKWUoeyFCJWY5-N2DxJc_J56uw7DL7V/view?usp=sharing",
-            "https://drive.google.com/file/d/1DKKz6XjZy7l-2zPXHeFeXXsxt3mHaNPM/view?usp=sharing"
+            "https://drive.google.com/file/d/1M9meDDdeCRFriRkphtxh-gflbbLegsk-/view?usp=sharing",
         ],
-        "Project 3": [],
+        "GuideME": [
+            "https://drive.google.com/file/d/1WHpNzJl3P44aGsAZMUxiozwL8UVRNBwd/view?usp=sharing",
+            "https://drive.google.com/file/d/16VpkeSc3AniF5QcnA2Pbx2o8TxxxP7cq/view?usp=sharing",
+            "https://drive.google.com/file/d/1rurjwsQyDJekiQ4j16trxdHCrHDaA0PE/view?usp=sharing"
+        ],
         "Project 4": [],
         "Project 5": [],
         "Project 6": []
@@ -257,7 +261,7 @@ window.addEventListener('load', () => {
     const projectDescriptions = {
         "O'Cos (Online Cosmetic)": "<strong>What is O’Cos?</strong><br>O’Cos is an exclusive e-commerce platform operating in the cosmetics sector. We provide all your premium beauty product needs from skincare, lipsticks, makeup, and much more. Discover the best version of yourself with O'Cos.",
         "1st Symphony": "<strong>Your Gateway to Unforgettable Concerts</strong><br>Welcome to 1st Symphony, your go-to destination for purchasing music concert tickets online! Browse our wide selection of concerts, from rock to pop to jazz, and secure your tickets with ease.",
-        "Project 3": "Deskripsi untuk Project 3 belum tersedia. Segera lengkapi data ini.",
+        "GuideME": "<strong>Your Personal Tour Guide</strong><br>Guide Me is a Progressive Web App designed to provide complete tourist destination information in Batam, equipped with AI and Google Maps API for real-time navigation.",
         "Project 4": "Deskripsi untuk Project 4 belum tersedia. Segera lengkapi data ini.",
         "Project 5": "Deskripsi untuk Project 5 belum tersedia. Segera lengkapi data ini.",
         "Project 6": "Deskripsi untuk Project 6 belum tersedia. Segera lengkapi data ini."
@@ -267,7 +271,7 @@ window.addEventListener('load', () => {
     const projectLinks = {
         "O'Cos (Online Cosmetic)": "o_cos.html",
         "1st Symphony": "1st_symphony.html",
-        "Project 3": "#",
+        "GuideME": "guideme.html",
         "Project 4": "#",
         "Project 5": "#",
         "Project 6": "#"
@@ -351,6 +355,13 @@ window.addEventListener('load', () => {
                     
                     modalGallery.appendChild(imgEl);
                 });
+            }
+            
+            // Jika project GuideME, sesuaikan mode gallery jadi portrait
+            if (projectName === 'GuideME') {
+                modalGallery.classList.add('portrait-gallery');
+            } else {
+                modalGallery.classList.remove('portrait-gallery');
             }
             
             // Tampilkan Modal
