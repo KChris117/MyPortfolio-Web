@@ -252,7 +252,11 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/16VpkeSc3AniF5QcnA2Pbx2o8TxxxP7cq/view?usp=sharing",
             "https://drive.google.com/file/d/1rurjwsQyDJekiQ4j16trxdHCrHDaA0PE/view?usp=sharing"
         ],
-        "Project 4": [],
+        "Stock Rising": [
+            "https://drive.google.com/file/d/1RbFDCrTnoVidzuw_qooXX1U24IvNRcrh/view?usp=drive_link",
+            "https://drive.google.com/file/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE/view?usp=drive_link",
+            "https://drive.google.com/file/d/17s34rzSQzPtW293jXwVGUHcM1xc0_4zV/view?usp=drive_link"
+        ],
         "Project 5": [],
         "Project 6": []
     };
@@ -262,7 +266,7 @@ window.addEventListener('load', () => {
         "O'Cos (Online Cosmetic)": "<strong>What is O’Cos?</strong><br>O’Cos is an exclusive e-commerce platform operating in the cosmetics sector. We provide all your premium beauty product needs from skincare, lipsticks, makeup, and much more. Discover the best version of yourself with O'Cos.",
         "1st Symphony": "<strong>Your Gateway to Unforgettable Concerts</strong><br>Welcome to 1st Symphony, your go-to destination for purchasing music concert tickets online! Browse our wide selection of concerts, from rock to pop to jazz, and secure your tickets with ease.",
         "GuideME": "<strong>Your Personal Tour Guide</strong><br>Guide Me is a Progressive Web App designed to provide complete tourist destination information in Batam, equipped with AI and Google Maps API for real-time navigation.",
-        "Project 4": "Deskripsi untuk Project 4 belum tersedia. Segera lengkapi data ini.",
+        "Stock Rising": "<strong>Stock Rising</strong><br>A digital board game for stock investment simulation built on Android using Unity and Photon PUN 2 for multiplayer. Play with 2-5 players and learn how to invest!",
         "Project 5": "Deskripsi untuk Project 5 belum tersedia. Segera lengkapi data ini.",
         "Project 6": "Deskripsi untuk Project 6 belum tersedia. Segera lengkapi data ini."
     };
@@ -272,7 +276,7 @@ window.addEventListener('load', () => {
         "O'Cos (Online Cosmetic)": "o_cos.html",
         "1st Symphony": "1st_symphony.html",
         "GuideME": "guideme.html",
-        "Project 4": "#",
+        "Stock Rising": "stock_rising.html",
         "Project 5": "#",
         "Project 6": "#"
     };
