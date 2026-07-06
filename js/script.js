@@ -377,6 +377,7 @@ window.addEventListener('load', () => {
             }
             
             // Tampilkan Modal
+            modalGallery.scrollLeft = 0; // Reset scroll posisi ke gambar pertama
             modal.classList.add('active');
             isModalOpen = true;
         });

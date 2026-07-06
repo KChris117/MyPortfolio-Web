@@ -360,3 +360,18 @@ header {
     .hero-title { font-size: 48px; }
     .gallery-grid { grid-template-columns: 1fr; }
 }
+
+.logo {
+    background-color: black;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Circular Std', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    flex-shrink: 0;
+}
