@@ -257,8 +257,16 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE/view?usp=drive_link",
             "https://drive.google.com/file/d/17s34rzSQzPtW293jXwVGUHcM1xc0_4zV/view?usp=drive_link"
         ],
-        "Project 5": [],
-        "Project 6": []
+        "BAT Assembly Engineering": [
+            "https://drive.google.com/file/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5/view?usp=drive_link",
+            "https://drive.google.com/file/d/1VqJ60oiJaCyRKzOCbrrxR2SjA8v1ZjeV/view?usp=drive_link",
+            "https://drive.google.com/file/d/1xVcwsAz0H9vDFJxRjLVoOc0waJmYXpLh/view?usp=drive_link"
+        ],
+        "BAT 3D Printer App": [
+            "https://drive.google.com/file/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV/view?usp=drive_link",
+            "https://drive.google.com/file/d/16uIZdXa3TwFWJ12dKvyVsKkjJGPTdR13/view?usp=drive_link",
+            "https://drive.google.com/file/d/1zzv8oWibJQiWeH7MdgWh2WYs5h32U6Nd/view?usp=drive_link"
+        ]
     };
 
     // WADAH DESKRIPSI PROJECT
@@ -267,8 +275,8 @@ window.addEventListener('load', () => {
         "1st Symphony": "<strong>Your Gateway to Unforgettable Concerts</strong><br>Welcome to 1st Symphony, your go-to destination for purchasing music concert tickets online! Browse our wide selection of concerts, from rock to pop to jazz, and secure your tickets with ease.",
         "GuideME": "<strong>Your Personal Tour Guide</strong><br>Guide Me is a Progressive Web App designed to provide complete tourist destination information in Batam, equipped with AI and Google Maps API for real-time navigation.",
         "Stock Rising": "<strong>Stock Rising</strong><br>A digital board game for stock investment simulation built on Android using Unity and Photon PUN 2 for multiplayer. Play with 2-5 players and learn how to invest!",
-        "Project 5": "Deskripsi untuk Project 5 belum tersedia. Segera lengkapi data ini.",
-        "Project 6": "Deskripsi untuk Project 6 belum tersedia. Segera lengkapi data ini."
+        "BAT Assembly Engineering": "<strong>BAT Assembly Engineering App</strong><br>An internal web application built with ASP.NET MVC to manage inventory, track part transactions, and digitalize the Purchase Requisition (PR) and Purchase Order (PO) approval workflow.",
+        "BAT 3D Printer App": "<strong>3D Printer Request Web App</strong><br>An internal web application built with ASP.NET MVC to streamline and track 3D printing requests, replacing manual unstructured communication with a centralized dashboard."
     };
 
     // WADAH LINK PROJECT (File HTML Detail)
@@ -277,8 +285,8 @@ window.addEventListener('load', () => {
         "1st Symphony": "1st_symphony.html",
         "GuideME": "guideme.html",
         "Stock Rising": "stock_rising.html",
-        "Project 5": "#",
-        "Project 6": "#"
+        "BAT Assembly Engineering": "bat_assembly.html",
+        "BAT 3D Printer App": "bat_3d_printer.html"
     };
 
     // Fungsi helper untuk mengekstrak ID dari link GDrive dan merubahnya ke format lh3
