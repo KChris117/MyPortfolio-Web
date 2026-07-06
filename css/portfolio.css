@@ -387,7 +387,7 @@ body {
     body {
         display: flex;
         flex-direction: column;
-        padding: 40px 0; /* Padding kiri-kanan dihapus agar slideshow menyentuh ujung layar */
+        padding: 120px 0 40px 0; /* Padding atas ditambah agar tidak menabrak tombol & logo */
         gap: 15px; 
         height: auto;
         align-items: center;
