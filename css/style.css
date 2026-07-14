@@ -242,18 +242,23 @@ ul.custom-list li {
     flex-shrink: 0;
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 5vw;
-    position: absolute;
+    padding: 20px 5vw; /* Sedikit dikecilkan agar fixed navbar tidak terlalu memakan layar */
+    position: fixed; /* Diubah dari absolute ke fixed agar tetap terlihat saat di-scroll */
     top: 0;
     left: 0;
     width: 100%;
     box-sizing: border-box;
     z-index: 1000;
+    background: rgba(255, 255, 255, 0.7); /* Transparan putih */
+    backdrop-filter: blur(12px); /* Efek blur kaca */
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Garis batas super tipis */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); /* Bayangan lembut */
+    transition: all 0.3s ease;
 }
 .nav-links {
     display: flex;
