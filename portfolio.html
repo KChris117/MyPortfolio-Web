@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="css/portfolio.css">
 </head>
 <body>
+    <!-- Page Transition Loader -->
+    <div class="page-transition" id="page-transition">
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
     <header class="navbar">
         <div class="logo">&lt;c/h&gt;</div>
         <nav class="nav-links">
@@ -119,5 +123,38 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('page-transition');
+            
+            // Fade out the loader when the page loads
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+            }, 300);
+
+            // Handle link clicks for page transitions
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetUrl = this.getAttribute('href');
+                    const targetBlank = this.getAttribute('target');
+                    
+                    // Hanya tangani link yang pindah halaman (bukan anchor # atau tab baru)
+                    if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
+                        // Cek apakah link benar-benar menuju halaman berbeda, bukan anchor di halaman yang sama
+                        const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
+                        
+                        if (!isSamePageAnchor) {
+                            e.preventDefault(); 
+                            loader.classList.remove('fade-out');
+                            setTimeout(() => {
+                                window.location.href = targetUrl;
+                            }, 500);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
