@@ -222,8 +222,49 @@ ul.custom-list li {
         text-align: center;
         gap: 30px;
     }
+    /* Layout 5 Kotak (Grid 2x2 + 1 di tengah) */
     .masonry-grid {
-        column-count: 1;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px; /* Jarak antar kotak */
+    }
+    .masonry-grid .card {
+        width: calc(50% - 8px); /* 50% lebar layar dikurangi gap */
+        margin-bottom: 0; /* Hapus margin bawah karena sudah ada gap flex */
+        padding: 15px; /* Perkecil padding drastis agar teks muat */
+        box-sizing: border-box;
+    }
+    /* Penyesuaian Teks Kotak Agar Muat di Layar HP yang Dibagi 2 */
+    .card .section-title {
+        font-size: 18px; /* Diperkecil dari 28px */
+        margin-bottom: 15px;
+    }
+    .timeline-item {
+        padding-left: 15px;
+        margin-bottom: 15px;
+    }
+    .timeline-title {
+        font-size: 13px; /* Diperkecil dari 18px */
+        margin-bottom: 2px;
+    }
+    .timeline-date {
+        font-size: 11px;
+    }
+    .timeline-item div {
+        font-size: 11px !important; /* Untuk IPK dan detail */
+    }
+    .skill-badge {
+        font-size: 10px;
+        padding: 5px 8px;
+        margin: 2px;
+    }
+    ul.custom-list {
+        font-size: 11px;
+        padding-left: 15px;
+    }
+    ul.custom-list li {
+        margin-bottom: 8px;
     }
 }
 
@@ -319,7 +360,7 @@ ul.custom-list li {
 .footer-section {
     background-color: #111;
     color: white;
-    padding: 60px 0 40px 0;
+    padding: 30px 0 40px 0;
     margin-top: 60px;
 }
 .footer-container {
