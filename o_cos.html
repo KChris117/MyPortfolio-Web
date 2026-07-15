@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O'Cos - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
     <link rel="stylesheet" href="css/o_cos.css">
+    <!-- Devicon for Tech Stack Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 </head>
 <body>
+    <!-- Page Transition Loader -->
+    <div class="page-transition" id="page-transition">
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
 
-    <header>
-        <a href="portfolio.html" class="back-btn">
-            ← Back to Portfolio
+    <header class="project-header">
+        <a href="projects.html" class="back-btn">
+            ← Back to My Projects
         </a>
-    
-        <div class="logo">&lt;c/h&gt;</div>
     </header>
 
     <section class="hero">
@@ -33,15 +41,17 @@
     <div class="container">
         
         <!-- About & Story -->
-        <div class="grid-2">
-            <div>
-                <h2 class="section-title">The Story Behind <span>O'Cos</span></h2>
-                <p class="text-body">O'Cos was born out of a challenge during the COVID-19 pandemic. We observed that many cosmetic businesses were struggling to sell their products offline due to social restrictions.</p>
-                <p class="text-body">To overcome this hurdle and provide a modern solution, we built this exclusive e-commerce platform. O'Cos bridges the gap between premium cosmetic brands and beauty enthusiasts, ensuring that self-care and beauty can still thrive from the safety of home.</p>
-                <p class="text-body">This project was proudly developed as a final project by Semester 1 Informatics Engineering students from Poltek Batam.</p>
-            </div>
-            <div class="glass-card" style="padding: 0; overflow: hidden; height: 100%;">
-                <img src="https://lh3.googleusercontent.com/d/1iKbobOvCdFniBfpMrsAH96SOc01c06nP=w1200" style="width: 100%; height: 100%; object-fit: cover;" alt="O'Cos Showcase">
+        <div style="margin-bottom: 100px;">
+            <h2 class="section-title" id="story-title">The Story Behind <span>O'Cos</span></h2>
+            <div class="about-grid">
+                <div class="about-text-content">
+                    <p class="text-body story-text">O'Cos was born out of a challenge during the COVID-19 pandemic. We observed that many cosmetic businesses were struggling to sell their products offline due to social restrictions.</p>
+                    <p class="text-body story-text">To overcome this hurdle and provide a modern solution, we built this exclusive e-commerce platform. O'Cos bridges the gap between premium cosmetic brands and beauty enthusiasts, ensuring that self-care and beauty can still thrive from the safety of home.</p>
+                    <p class="text-body story-text" style="margin-bottom: 0;">This project was proudly developed as a final project by Semester 1 Informatics Engineering students from Poltek Batam.</p>
+                </div>
+                <div class="glass-card about-img-card" style="padding: 0; overflow: hidden;">
+                    <img src="https://lh3.googleusercontent.com/d/1iKbobOvCdFniBfpMrsAH96SOc01c06nP=w1200" style="width: 100%; height: 100%; object-fit: cover;" alt="O'Cos Showcase">
+                </div>
             </div>
         </div>
 
@@ -65,26 +75,30 @@
             </div>
         </div>
 
-        <!-- Key Features & Tech Stack -->
-        <div class="grid-2">
-            <div>
-                <h2 class="section-title">Key <span>Features</span></h2>
-                <ul class="text-body" style="line-height: 2;">
-                    <li><strong>Premium UI/UX:</strong> A modern, glassmorphism-inspired design optimized for Desktop and Mobile.</li>
-                    <li><strong>Product Catalog:</strong> Dynamic product grid with built-in pagination.</li>
-                    <li><strong>Authentication:</strong> Secure Login & Sign-up system with password hashing.</li>
-                    <li><strong>Shopping Cart:</strong> Add to cart, adjust quantities, and process simulated checkouts.</li>
-                    <li><strong>Wishlist:</strong> Users can easily save their favorite products.</li>
-                    <li><strong>Order Tracking:</strong> Monitor status (Pending, On Packing, On Delivery, Completed).</li>
-                </ul>
+        <!-- Key Features -->
+        <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Key <span>Features</span></h2>
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto 100px auto;">
+            <ul class="text-body" style="line-height: 2; margin: 0; padding-left: 20px;">
+                <li><strong>Premium UI/UX:</strong> A modern, glassmorphism-inspired design optimized for Desktop and Mobile.</li>
+                <li><strong>Product Catalog:</strong> Dynamic product grid with built-in pagination.</li>
+                <li><strong>Authentication:</strong> Secure Login & Sign-up system with password hashing.</li>
+                <li><strong>Shopping Cart:</strong> Add to cart, adjust quantities, and process simulated checkouts.</li>
+                <li><strong>Wishlist:</strong> Users can easily save their favorite products.</li>
+                <li><strong>Order Tracking:</strong> Monitor status (Pending, On Packing, On Delivery, Completed).</li>
+            </ul>
+        </div>
+
+        <!-- Tech Stack -->
+        <div style="margin-bottom: 100px; text-align: center;">
+            <h2 class="section-title">Tech <span>Stack</span></h2>
+            <div class="tech-icons">
+                <i class="devicon-html5-plain colored" title="HTML5"></i>
+                <i class="devicon-css3-plain colored" title="CSS3"></i>
+                <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                <i class="devicon-php-plain colored" title="PHP"></i>
+                <i class="devicon-mysql-plain colored" title="MySQL"></i>
             </div>
-            <div class="glass-card">
-                <h2 class="section-title" style="font-size: 32px;">Tech <span>Stack</span></h2>
-                <p class="text-body"><strong>Frontend:</strong> HTML5, CSS3 (Vanilla Custom CSS), JavaScript (Vanilla)</p>
-                <p class="text-body"><strong>Backend:</strong> PHP 8 (Native / Procedural)</p>
-                <p class="text-body"><strong>Database:</strong> MySQL (MariaDB)</p>
-                <p class="text-body"><strong>Architecture:</strong> Server-Side Rendering (SSR) with multi-page structure.</p>
-            </div>
+            <p class="text-body" style="margin-top: 30px;">Architecture: Server-Side Rendering (SSR) with multi-page structure.</p>
         </div>
 
         <!-- Meet The Team -->
@@ -134,7 +148,7 @@
         </div>
         
         <!-- Run Locally -->
-        <h2 class="section-title" style="margin-top: 100px;">How to Run <span>Locally</span></h2>
+        <h2 class="section-title" style="text-align: center;"margin-top: 100px;">How to Run <span>Locally</span></h2>
         <div class="glass-card">
             <p class="text-body" style="margin-bottom: 10px;">Clone this repository and set up your local environment (XAMPP/WAMP):</p>
             <div class="code-block">
@@ -160,5 +174,46 @@
     </div>
 
     <script src="js/o_cos.js"></script>
+    <script>
+        // Transition Loader & Entrance Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-transition');
+            const heroContent = document.querySelector('.hero-content');
+            
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    // 1. Hilangkan loader
+                    loader.classList.add('fade-out');
+                    
+                    // 2. Mainkan animasi masuk konten setelah loader mulai menghilang
+                    setTimeout(() => {
+                        if (heroContent) {
+                            heroContent.classList.add('animate-in');
+                        }
+                    }, 300); // delay 300ms agar pas dengan timing transisi
+                }, 300);
+            });
+        });
+
+        // Page Links transition
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                const targetBlank = this.getAttribute('target');
+                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
+                    const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
+                    if (!isSamePageAnchor) {
+                        e.preventDefault(); 
+                        const loader = document.getElementById('page-transition');
+                        loader.classList.remove('fade-out');
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 500);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
