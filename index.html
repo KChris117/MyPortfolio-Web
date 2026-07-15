@@ -155,13 +155,15 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             const loader = document.getElementById('page-transition');
             
-            // Fade out the loader when the page loads
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-            }, 300);
+            // Fade out the loader ONLY AFTER everything has fully loaded
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                }, 300);
+            });
 
             // Handle link clicks for page transitions
             const links = document.querySelectorAll('a');

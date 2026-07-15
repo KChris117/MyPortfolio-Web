@@ -124,13 +124,15 @@
 
     <script src="js/script.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('load', () => {
             const loader = document.getElementById('page-transition');
             
-            // Fade out the loader when the page loads
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-            }, 300);
+            // Fade out the loader ONLY AFTER everything (images & slideshow) has fully loaded and started
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                }, 300);
+            });
 
             // Handle link clicks for page transitions
             const links = document.querySelectorAll('a');
