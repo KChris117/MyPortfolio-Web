@@ -6,16 +6,21 @@
     <title>1st Symphony - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <!-- Devicon for Tech Stack Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="stylesheet" href="css/1st_symphony.css">
 </head>
 <body>
 
+    <!-- Page Transition Loader -->
+    <div id="page-transition" class="page-transition">
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
+
     <header>
-        <a href="portfolio.html" class="back-btn">
-            ← Back to Portfolio
+        <a href="projects.html" class="back-btn">
+            ← Back to My Projects
         </a>
-    
-        <div class="logo">&lt;c/h&gt;</div>
     </header>
 
     <section class="hero">
@@ -23,8 +28,10 @@
             <div class="hero-badge">Ticketing E-Commerce</div>
             <h1 class="hero-title">1st Symphony</h1>
             <p class="hero-subtitle">Your go-to destination for purchasing music concert tickets online. Secure your tickets with ease.</p>
-            <a href="https://1st-symphony.vercel.app/" target="_blank" class="btn-primary" style="margin-top: 10px;">🚀 Visit Live Website</a>
-            <a href="https://github.com/muhammadpadanta/laravel-fullstack-app.git" target="_blank" class="btn-primary" style="margin-top: 10px; margin-left: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">💻 View Source Code</a>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="https://1st-symphony.vercel.app/" target="_blank" class="btn-primary">🚀 Visit Live Website</a>
+                <a href="https://github.com/muhammadpadanta/laravel-fullstack-app.git" target="_blank" class="btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">💻 View Source Code</a>
+            </div>
         </div>
     </section>
 
@@ -37,9 +44,22 @@
                 <p class="text-body">Our application is built using the Laravel PHP framework, which provides a solid foundation for developing robust web applications with a powerful routing system, database migrations, and authentication.</p>
                 <p class="text-body">In addition to Laravel, we've utilized TailwindCSS to rapidly build custom designs. We've also integrated DaisyUI, which extends TailwindCSS with ready-made components like buttons, cards, and navigation bars to create stunning interfaces.</p>
             </div>
-            <div class="glass-card" style="padding: 0; overflow: hidden; height: 100%;">
-                <img src="https://lh3.googleusercontent.com/d/1M9meDDdeCRFriRkphtxh-gflbbLegsk-=w1200" style="width: 100%; height: 100%; object-fit: cover;" alt="1st Symphony Showcase">
+            <div class="glass-card" style="padding: 0; overflow: hidden; display: flex; align-items: center;">
+                <img src="https://lh3.googleusercontent.com/d/1hpOqFfLYcsRvw52okjpldedexpBAnLUc=w1200" style="width: 100%; height: auto; display: block;" alt="1st Symphony Showcase">
             </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div style="margin-bottom: 100px; text-align: center;">
+            <h2 class="section-title">Tech <span>Stack</span></h2>
+            <div class="tech-icons">
+                <i class="devicon-laravel-plain colored" title="Laravel"></i>
+                <i class="devicon-tailwindcss-plain colored" title="Tailwind CSS"></i>
+                <i class="devicon-react-original colored" title="React.js"></i>
+                <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                <i class="devicon-mysql-plain colored" title="MySQL"></i>
+            </div>
+            <p class="text-body" style="margin-top: 30px;">Built with Laravel, Tailwind CSS, React.js, and MySQL.</p>
         </div>
 
         <!-- Why Choose Us / Features -->
@@ -139,7 +159,7 @@
         </div>
         
         <!-- Run Locally -->
-        <h2 class="section-title" style="margin-top: 100px;">How to Run <span>Locally</span></h2>
+        <h2 class="section-title" style="margin-top: 100px; text-align: center;">How to Run <span>Locally</span></h2>
         <div class="glass-card">
             <p class="text-body" style="margin-bottom: 10px;">Follow these steps to launch the app on your local machine:</p>
             <div class="code-block">
@@ -169,5 +189,36 @@
 
     <!-- Reuse the same detail project script -->
     <script src="js/o_cos.js"></script>
+    <script>
+        // Transition Loader & Entrance Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-transition');
+            const heroContent = document.querySelector('.hero-content');
+            
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    if (loader) loader.classList.add('fade-out');
+                    setTimeout(() => {
+                        if (heroContent) heroContent.classList.add('animate-in');
+                    }, 300);
+                }, 300);
+            });
+        });
+
+        // Page Links transition
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                const targetBlank = this.getAttribute('target');
+                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
+                    e.preventDefault(); 
+                    const loader = document.getElementById('page-transition');
+                    if(loader) loader.classList.remove('fade-out');
+                    setTimeout(() => { window.location.href = targetUrl; }, 500);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
