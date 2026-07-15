@@ -262,10 +262,15 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/1VqJ60oiJaCyRKzOCbrrxR2SjA8v1ZjeV/view?usp=drive_link",
             "https://drive.google.com/file/d/1xVcwsAz0H9vDFJxRjLVoOc0waJmYXpLh/view?usp=drive_link"
         ],
-        "BAT 3D Printer App": [
+            "BAT 3D Printer App": [
             "https://drive.google.com/file/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV/view?usp=drive_link",
             "https://drive.google.com/file/d/16uIZdXa3TwFWJ12dKvyVsKkjJGPTdR13/view?usp=drive_link",
             "https://drive.google.com/file/d/1zzv8oWibJQiWeH7MdgWh2WYs5h32U6Nd/view?usp=drive_link"
+        ],
+        "Certificates": [
+            "https://drive.google.com/file/d/1lu5IQ9XqMuS1Zf_do0xrSdUFOrNAltJt/view?usp=drive_link",
+            "https://drive.google.com/file/d/1srxv1SRjC7gftlGc9Ndoyq50SnGfqEtj/view?usp=drive_link",
+            "https://drive.google.com/file/d/1H1llbbuV53luwTnFjZKud4s6uwe9gmBW/view?usp=drive_link"
         ]
     };
 
@@ -276,7 +281,8 @@ window.addEventListener('load', () => {
         "GuideME": "<strong>Your Personal Tour Guide</strong><br>Guide Me is a Progressive Web App designed to provide complete tourist destination information in Batam, equipped with AI and Google Maps API for real-time navigation.",
         "Stock Rising": "<strong>Stock Rising</strong><br>A digital board game for stock investment simulation built on Android using Unity and Photon PUN 2 for multiplayer. Play with 2-5 players and learn how to invest!",
         "BAT Assembly Engineering": "<strong>BAT Assembly Engineering App</strong><br>An internal web application built with ASP.NET MVC to manage inventory, track part transactions, and digitalize the Purchase Requisition (PR) and Purchase Order (PO) approval workflow.",
-        "BAT 3D Printer App": "<strong>3D Printer Request Web App</strong><br>An internal web application built with ASP.NET MVC to streamline and track 3D printing requests, replacing manual unstructured communication with a centralized dashboard."
+        "BAT 3D Printer App": "<strong>3D Printer Request Web App</strong><br>An internal web application built with ASP.NET MVC to streamline and track 3D printing requests, replacing manual unstructured communication with a centralized dashboard.",
+        "Certificates": "<strong>My Certificates & Awards</strong><br>A collection of my professional certificates, awards, and achievements."
     };
 
     // WADAH LINK PROJECT (File HTML Detail)
@@ -286,7 +292,8 @@ window.addEventListener('load', () => {
         "GuideME": "guideme.html",
         "Stock Rising": "stock_rising.html",
         "BAT Assembly Engineering": "bat_assembly.html",
-        "BAT 3D Printer App": "bat_3d_printer.html"
+        "BAT 3D Printer App": "bat_3d_printer.html",
+        "Certificates": "certificates.html"
     };
 
     // Fungsi helper untuk mengekstrak ID dari link GDrive dan merubahnya ke format lh3
@@ -327,6 +334,13 @@ window.addEventListener('load', () => {
             // Render Link Button
             const btnView = modal.querySelector('.btn-view');
             btnView.href = projectLinks[projectName] || "#";
+            
+            // Dynamic Button Text
+            if (projectName === 'Certificates') {
+                btnView.innerText = "View All My Certificates";
+            } else {
+                btnView.innerText = "View Full Project";
+            }
             
             // Render isi Gallery
             modalGallery.innerHTML = ''; // Kosongkan gallery sebelumnya

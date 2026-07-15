@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Certificates</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Override masonry-grid to be exactly 3 columns (Grid) */
+        .masonry-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px;
+            column-count: auto !important; 
+        }
+        .cert-card {
+            padding: 10px;
+            cursor: zoom-in;
+            margin-bottom: 0 !important; /* Margin bawah digantikan oleh gap grid */
+            width: 100% !important; 
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cert-card img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .cert-card:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .lightbox-cert {
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            cursor: pointer;
+        }
+        .lightbox-cert.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox-cert img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .lightbox-cert.active img {
+            transform: scale(1);
+        }
+        @media (max-width: 768px) {
+            .masonry-grid {
+                gap: 10px; /* Perkecil jarak antar gambar di HP */
+                /* Tetap 3 kolom di HP, tidak diubah */
+            }
+            .cert-card {
+                padding: 5px; /* Perkecil ruang putih di HP agar gambar lebih maksimal */
+                border-radius: 8px; /* Sudut sedikit ditajamkan di HP */
+            }
+            .cert-card img {
+                border-radius: 6px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Transition Loader -->
+    <div class="page-transition" id="page-transition">
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
+
+    <header class="navbar">
+        <a href="index.html" class="logo" style="text-decoration: none;">&lt;c/h&gt;</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#about-me">About Me</a>
+            <a href="#contact-me">Contact Me</a>
+            <a href="projects.html">Projects</a>
+        </nav>
+    </header>
+
+    <div class="container" style="margin-top: 120px;">
+        <h1 class="hero-title" style="text-align: center; margin-bottom: 10px;">My Certificates</h1>
+        <p class="text-body" style="text-align: center; margin-bottom: 50px;">A collection of my professional achievements, awards, and qualifications.</p>
+        
+        <div class="masonry-grid">
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1lu5IQ9XqMuS1Zf_do0xrSdUFOrNAltJt=w800" alt="Certificate 1"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1srxv1SRjC7gftlGc9Ndoyq50SnGfqEtj=w800" alt="Certificate 2"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1H1llbbuV53luwTnFjZKud4s6uwe9gmBW=w800" alt="Certificate 3"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1BhKccRFvy8lt-x8nF5Y8lZM17YvXtINO=w800" alt="Certificate 4"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1tyKosev_xIf3FB45XGVYhvWV0FtF-9lo=w800" alt="Certificate 5"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1km7CbramSLYp3pqN4hkf5pk9sPEguMjv=w800" alt="Certificate 6"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1ns557_8NlKrz7JVnhgrrLm4_1Ai0hfgI=w800" alt="Certificate 7"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1SH8cBbNhPZCCPj5Ilu_5CMNri8yWCKQQ=w800" alt="Certificate 8"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1-sD_n6CmwXbCpum8AuikpXu3F-JKxJGh=w800" alt="Certificate 9"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1WDaz-_4QK4tXcytXvHWAdJJpBGwW15zO=w800" alt="Certificate 10"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1AjzYijUmbRh76XKJ80OZef-9lggSdRzQ=w800" alt="Certificate 11"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/1--mD8Hj0PSoHkfRvIQzTBelPoq-D6Eza=w800" alt="Certificate 12"></div>
+            <div class="card cert-card"><img class="cert-img" src="https://lh3.googleusercontent.com/d/11xMTIBxKouK6Og22xSAfMAPUXj95Fmma=w800" alt="Certificate 13"></div>
+        </div>
+    </div>
+
+    <!-- Contact / Footer Section -->
+    <footer class="footer-section" id="contact-me">
+        <div class="container footer-container">
+            <!-- Kiri: Info Profil & Kontak -->
+            <div class="footer-col">
+                <h3>Christoffel Aristo Marbun</h3>
+                <p style="margin-bottom: 25px;">Contact Me</p>
+                <div class="footer-contact">
+                    <p>📞 +62 852 7463 7588</p>
+                    <p>📍 Centra Melati Blok C1 No 1, Batam, Indonesia 29464</p>
+                </div>
+            </div>
+            
+            <!-- Tengah: Tautan -->
+            <div class="footer-col">
+                <h3 style="font-size: 18px;">Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about-me">About Me</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="#contact-me">Contact</a></li>
+                </ul>
+            </div>
+            
+            <!-- Kanan: Media Sosial (Ikon) -->
+            <div class="footer-col">
+                <h3 style="font-size: 18px;">Social Media</h3>
+                <div class="social-icons">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=offelmarbun@gmail.com" target="_blank" title="Email"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email"></a>
+                    <a href="https://www.linkedin.com/in/christoffel-aristo-marbun-a31024353/" target="_blank" title="LinkedIn"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                    <a href="https://github.com/KChris117" target="_blank" title="GitHub"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" style="filter: invert(1);"></a>
+                    <a href="https://www.youtube.com/@ChristoffelAristo" target="_blank" title="YouTube"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox-cert" class="lightbox-cert">
+        <img id="lightbox-cert-img" src="" alt="Certificate Fullscreen">
+    </div>
+
+    <script>
+        // Transition loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-transition');
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    loader.classList.add('fade-out');
+                }, 300);
+            });
+        });
+
+        // Page Links transition
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                const targetBlank = this.getAttribute('target');
+                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
+                    const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
+                    if (!isSamePageAnchor) {
+                        e.preventDefault(); 
+                        const loader = document.getElementById('page-transition');
+                        loader.classList.remove('fade-out');
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 500);
+                    }
+                }
+            });
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox-cert');
+        const lightboxImg = document.getElementById('lightbox-cert-img');
+        
+        document.querySelectorAll('.cert-img').forEach(img => {
+            img.addEventListener('click', () => {
+                // Gunakan versi HD untuk fullscreen
+                lightboxImg.src = img.src.replace('=w800', '=w1600');
+                lightbox.classList.add('active');
+            });
+        });
+
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                lightboxImg.src = '';
+            }, 400); // Tunggu sampai animasi zoom out selesai
+        });
+    </script>
+</body>
+</html>
