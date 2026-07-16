@@ -33,8 +33,9 @@
     </style>
 </head>
 <body>
-    <!-- Page Transition Loader -->
-    <div id="page-transition" class="page-transition dissolve-transition">
+    <!-- Canvas Dissolve Loader -->
+    <canvas id="dissolve-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; pointer-events: all; background-color: transparent;"></canvas>
+    <div id="canvas-logo-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100000; pointer-events: none; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease;">
         <div class="transition-logo">&lt;c/h&gt;</div>
     </div>
 
@@ -69,31 +70,31 @@
             </div>
         </div>
 
-        <!-- Key Features & Tech Stack -->
-        <div class="grid-2">
-            <div>
-                <h2 class="section-title">Key <span>Features</span></h2>
-                <ul class="text-body" style="line-height: 2;">
-                    <li><strong>Multiplayer Simulation:</strong> Supports 2-5 players in an online environment using Client-Hosted Listen Server architecture.</li>
-                    <li><strong>Turn-Based Gameplay:</strong> Follow realistic market cycles including Bidding, Action, Sell, Rumor, and Resolution phases.</li>
-                    <li><strong>Dynamic Market Events:</strong> Influence stock prices using rumor cards or adapt to shifting sector performances and dividends.</li>
-                    <li><strong>Avatar & Border Shop:</strong> Players can customize their profile by purchasing avatars and borders using "Finpoin" (virtual currency).</li>
-                    <li><strong>Social Features:</strong> A complete friend system allowing users to search, add, accept, or ignore friend requests.</li>
-                </ul>
+        <!-- Key Features -->
+        <div style="margin-bottom: 100px; text-align: center;">
+            <h2 class="section-title">Key <span>Features</span></h2>
+            <ul class="text-body" style="line-height: 2; display: inline-block; text-align: left; max-width: 800px; margin: 0 auto;">
+                <li><strong>Multiplayer Simulation:</strong> Supports 2-5 players in an online environment using Client-Hosted Listen Server architecture.</li>
+                <li><strong>Turn-Based Gameplay:</strong> Follow realistic market cycles including Bidding, Action, Sell, Rumor, and Resolution phases.</li>
+                <li><strong>Dynamic Market Events:</strong> Influence stock prices using rumor cards or adapt to shifting sector performances and dividends.</li>
+                <li><strong>Avatar & Border Shop:</strong> Players can customize their profile by purchasing avatars and borders using "Finpoin" (virtual currency).</li>
+                <li><strong>Social Features:</strong> A complete friend system allowing users to search, add, accept, or ignore friend requests.</li>
+            </ul>
+        </div>
+
+        <!-- Tech Stack -->
+        <div style="margin-bottom: 100px; text-align: center;">
+            <h2 class="section-title">Tech <span>Stack</span></h2>
+            <div class="tech-icons">
+                <i class="devicon-unity-original" style="color: white;" title="Unity"></i>
+                <i class="devicon-csharp-plain colored" title="C#"></i>
+                <i class="devicon-firebase-plain colored" title="Firebase"></i>
+                <i class="devicon-figma-plain colored" title="Figma"></i>
+                <i class="devicon-blender-original colored" title="Blender"></i>
+                <i class="devicon-visualstudio-plain colored" title="Visual Studio"></i>
+                <i class="devicon-vscode-plain colored" title="VS Code"></i>
             </div>
-            <div>
-                <h2 class="section-title" style="font-size: 32px;">Tech <span>Stack</span></h2>
-                <div class="tech-icons">
-                    <i class="devicon-unity-original" style="color: white;" title="Unity"></i>
-                    <i class="devicon-csharp-plain colored" title="C#"></i>
-                    <i class="devicon-firebase-plain colored" title="Firebase"></i>
-                    <i class="devicon-figma-plain colored" title="Figma"></i>
-                    <i class="devicon-blender-original colored" title="Blender"></i>
-                    <i class="devicon-visualstudio-plain colored" title="Visual Studio"></i>
-                    <i class="devicon-vscode-plain colored" title="VS Code"></i>
-                </div>
-                <p class="text-body" style="margin-top: 30px;">Built with Unity Engine using C# and Photon PUN 2 for real-time multiplayer networking.</p>
-            </div>
+            <p class="text-body" style="margin-top: 30px;">Built with Unity Engine using C# and Photon PUN 2 for real-time multiplayer networking.</p>
         </div>
 
         <!-- Meet The Team -->
@@ -219,32 +220,73 @@
 
     <script src="js/o_cos.js"></script>
     <script>
-        // Transition Loader & Entrance Animation
+        // Canvas Dissolve Transition Logic
+        const canvas = document.getElementById('dissolve-canvas');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const blockSize = 30; // 10x10 pixel chunks (cukup optimal untuk performa tapi tetap terlihat efek pixelated)
+        let blocks = [];
+
+        function initBlocks() {
+            blocks = [];
+            const cols = Math.ceil(canvas.width / blockSize);
+            const rows = Math.ceil(canvas.height / blockSize);
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    blocks.push({ x: i * blockSize, y: j * blockSize });
+                }
+            }
+            // Acak urutan pixel (Fisher-Yates)
+            for (let i = blocks.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
+            }
+        }
+
         window.addEventListener('load', () => {
-            const loader = document.getElementById('page-transition');
             const heroContent = document.querySelector('.hero-content');
+            const logoOverlay = document.getElementById('canvas-logo-overlay');
+            canvas.style.pointerEvents = 'all';
             
-            requestAnimationFrame(() => {
+            // Isi penuh layar dengan warna hitam di awal
+            ctx.fillStyle = '#1e3a8a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            initBlocks();
+            
+            const totalFrames = 60; // 1 detik pada 60 FPS
+            const blocksPerFrame = Math.ceil(blocks.length / totalFrames);
+            
+            function dissolveIn() {
+                for (let i = 0; i < blocksPerFrame; i++) {
+                    if (blocks.length === 0) break;
+                    const b = blocks.pop();
+                    ctx.clearRect(b.x, b.y, blockSize, blockSize);
+                }
+                if (blocks.length > 0) {
+                    requestAnimationFrame(dissolveIn);
+                } else {
+                    canvas.style.pointerEvents = 'none'; // Izinkan interaksi
+                }
+            }
+            
+            // Jeda sejenak sebelum efek dissolve dimulai
+            setTimeout(() => {
+                if (logoOverlay) logoOverlay.style.opacity = '0';
+                requestAnimationFrame(dissolveIn);
                 setTimeout(() => {
-                    // 1. Hilangkan loader dengan animasi dissolve
-                    loader.classList.add('dissolve-out');
-                    
-                    // 2. Mainkan animasi masuk konten setelah loader mulai menghilang
-                    setTimeout(() => {
-                        if (heroContent) {
-                            heroContent.classList.add('animate-in');
-                        }
-                    }, 300);
-                    
-                    // 3. Hapus loader dari DOM setelah transisi selesai
-                    setTimeout(() => {
-                        loader.style.display = 'none';
-                    }, 800);
-                }, 150); // Sedikit jeda agar transisi terasa smooth
-            });
+                    if (heroContent) heroContent.classList.add('animate-in');
+                }, 300);
+            }, 300); // Tahan logo lebih lama sedikit biar terlihat
         });
 
-        // Page Links transition
+        // Page Links transition (Dissolve Out)
         const links = document.querySelectorAll('a');
         links.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -252,14 +294,31 @@
                 const targetBlank = this.getAttribute('target');
                 if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
                     e.preventDefault(); 
-                    const loader = document.getElementById('page-transition');
-                    if(loader) {
-                        loader.style.display = 'flex';
-                        setTimeout(() => {
-                            loader.classList.remove('dissolve-out');
-                        }, 10);
+                    const logoOverlay = document.getElementById('canvas-logo-overlay');
+                    if (logoOverlay) logoOverlay.style.opacity = '0'; // Pastikan hilang di awal transisi keluar
+                    
+                    canvas.style.pointerEvents = 'all';
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    initBlocks();
+                    ctx.fillStyle = '#1e3a8a';
+                    
+                    const totalFrames = 45; // Lebih cepat saat keluar
+                    const blocksPerFrame = Math.ceil(blocks.length / totalFrames);
+                    
+                    function dissolveOut() {
+                        for (let i = 0; i < blocksPerFrame; i++) {
+                            if (blocks.length === 0) break;
+                            const b = blocks.pop();
+                            ctx.fillRect(b.x, b.y, blockSize, blockSize);
+                        }
+                        if (blocks.length > 0) {
+                            requestAnimationFrame(dissolveOut);
+                        } else {
+                            if (logoOverlay) logoOverlay.style.opacity = '1';
+                            setTimeout(() => { window.location.href = targetUrl; }, 300);
+                        }
                     }
-                    setTimeout(() => { window.location.href = targetUrl; }, 800);
+                    requestAnimationFrame(dissolveOut);
                 }
             });
         });
