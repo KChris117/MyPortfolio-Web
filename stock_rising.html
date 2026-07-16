@@ -27,8 +27,19 @@
             color: white !important;
         }
         .hero-badge {
-            background: rgba(30, 58, 138, 0.2) !important;
-            border-color: rgba(30, 58, 138, 0.3) !important;
+            background: rgba(96, 165, 250, 0.15) !important;
+            border-color: rgba(96, 165, 250, 0.3) !important;
+            color: #60a5fa !important; /* Bright light blue for contrast against dark background */
+        }
+        
+        /* Hero Background - Desktop & Mobile Optimization */
+        .hero {
+            background: #121212 url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat center right / cover !important;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                background: #121212 url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat right top / 200% auto !important;
+            }
         }
     </style>
 </head>
@@ -45,7 +56,7 @@
         </a>
     </header>
 
-    <section class="hero" style="background: url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat center center/cover;">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">Android Game</div>
             <h1 class="hero-title">Stock Rising</h1>

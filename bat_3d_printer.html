@@ -6,60 +6,81 @@
     <title>BAT 3D Printer Request Web App - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <!-- Devicon for Tech Stack Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="stylesheet" href="css/o_cos.css">
+    <link rel="stylesheet" href="css/bat_3d_printer.css">
 </head>
 <body>
 
-    <header>
-        <a href="portfolio.html" class="back-btn">
-            ← Back to Portfolio
+    <!-- Split Horizontal Transition Loader -->
+    <div class="split-transition" id="split-transition">
+        <div class="split-half split-top"></div>
+        <div class="split-half split-bottom"></div>
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
+
+    <header class="project-header">
+        <a href="projects.html" class="back-btn">
+            ← Back to My Projects
         </a>
-    
-        <div class="logo">&lt;c/h&gt;</div>
     </header>
 
-    <section class="hero" style="background: url('https://lh3.googleusercontent.com/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV=w2000') no-repeat center center/cover;">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">Internal Web Application</div>
             <h1 class="hero-title">BAT 3D Printer Request App</h1>
             <p class="hero-subtitle">An internal web application for managing and tracking 3D printing requests in a manufacturing environment.</p>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
+                <a href="https://apps.bth.infineon.com/BAT-3DPrinter/" target="_blank" class="btn-primary">🔒 Visit Internal Live Web</a>
+            </div>
         </div>
     </section>
 
     <div class="container">
         
         <!-- About & Story -->
-        <div class="grid-2">
-            <div>
-                <h2 class="section-title">The Story Behind <span>3D Printer App</span></h2>
-                <p class="text-body">The use of 3D printing technology for prototyping and specialized components has increased significantly in the industry. However, the process of submitting 3D printing requests was previously handled manually through verbal communication or messaging apps, leading to miscommunication, unorganized queues, and difficulties in tracking job statuses.</p>
-                <p class="text-body">To resolve these pain points, the BAT 3D Printer Request Web App was created. This centralized platform digitalizes the entire submission process, allowing users to submit detailed requests while providing administrators with a powerful dashboard to manage the production queue (Pending, On Progress, Completed, Rejected) in real-time.</p>
-                <p class="text-body">This project successfully brought transparency, structure, and efficient documentation to the 3D printing request lifecycle.</p>
+        <div style="text-align: center; max-width: 900px; margin: 0 auto 50px;">
+            <h2 class="section-title">The Story Behind <span>3D Printer App</span></h2>
+            <p class="text-body" style="margin-bottom: 15px;">The use of 3D printing technology for prototyping and specialized components has increased significantly in the industry. However, the process of submitting 3D printing requests was previously handled manually through verbal communication or messaging apps, leading to miscommunication, unorganized queues, and difficulties in tracking job statuses.</p>
+            <p class="text-body">To resolve these pain points, the BAT 3D Printer Request Web App was created. This centralized platform digitalizes the entire submission process, allowing users to submit detailed requests while providing administrators with a powerful dashboard to manage the production queue (Pending, On Progress, Completed, Rejected) in real-time.</p>
+            <p class="text-body" style="margin-bottom: 0;">This project successfully brought transparency, structure, and efficient documentation to the 3D printing request lifecycle.</p>
+        </div>
+        
+        <div class="glass-card" style="padding: 0; overflow: hidden; margin-bottom: 100px;">
+            <img src="https://lh3.googleusercontent.com/d/16uIZdXa3TwFWJ12dKvyVsKkjJGPTdR13=w1200" style="width: 100%; display: block;" alt="3D Printer App Showcase">
+        </div>
+
+        <!-- Tech Stack -->
+        <div style="margin-bottom: 100px; text-align: center;">
+            <h2 class="section-title">Tech <span>Stack</span></h2>
+            <div class="tech-icons">
+                <i class="devicon-csharp-plain colored" title="C#"></i>
+                <i class="devicon-dot-net-plain-wordmark colored" title="ASP.NET MVC"></i>
+                <i class="devicon-microsoftsqlserver-plain colored" title="SQL Server"></i>
+                <i class="devicon-html5-plain colored" title="HTML5"></i>
+                <i class="devicon-css3-plain colored" title="CSS3"></i>
+                <i class="devicon-javascript-plain colored" title="JavaScript"></i>
+                <i class="devicon-bootstrap-plain colored" title="Bootstrap"></i>
+                <i class="devicon-figma-plain colored" title="Figma"></i>
             </div>
-            <div class="glass-card" style="padding: 0; overflow: hidden; aspect-ratio: 16/9; align-self: center;">
-                <img src="https://lh3.googleusercontent.com/d/16uIZdXa3TwFWJ12dKvyVsKkjJGPTdR13=w1200" style="width: 100%; height: 100%; object-fit: cover;" alt="3D Printer App Showcase">
+            <div style="text-align: left; max-width: 800px; margin: 40px auto 0;">
+                <p class="text-body" style="margin-bottom: 10px;"><strong>🖥️ Framework:</strong> ASP.NET MVC (C#) using Razor View Engine.</p>
+                <p class="text-body" style="margin-bottom: 10px;"><strong>🗄️ Database:</strong> SQL Server & Entity Framework.</p>
+                <p class="text-body" style="margin-bottom: 0;"><strong>⚙️ Architecture:</strong> Model-View-Controller (MVC) & Waterfall Methodology.</p>
             </div>
         </div>
 
-        <!-- Key Features & Tech Stack -->
-        <div class="grid-2">
-            <div>
-                <h2 class="section-title">Key <span>Features</span></h2>
-                <ul class="text-body" style="line-height: 2;">
-                    <li><strong>Request Management:</strong> Digital forms for users to submit 3D printing requirements (filament type, urgency level, site area, and design attachments).</li>
-                    <li><strong>Admin Dashboard:</strong> A centralized control panel for administrators to manage requests, update statuses, and add completion notes.</li>
-                    <li><strong>Real-time Tracking:</strong> Users can effortlessly track their request history and monitor the status of their ongoing jobs.</li>
-                    <li><strong>Role-Based Access Control:</strong> Secure login and authorization managed by ASP.NET Identity to distinguish between Users and Admins.</li>
-                    <li><strong>Data Privacy:</strong> Ensures the confidentiality and security of uploaded design files.</li>
-                </ul>
-            </div>
-            <div class="glass-card">
-                <h2 class="section-title" style="font-size: 32px;">Tech <span>Stack</span></h2>
-                <p class="text-body"><strong>Framework:</strong> ASP.NET MVC (C#)</p>
-                <p class="text-body"><strong>Database:</strong> SQL Server & Entity Framework</p>
-                <p class="text-body"><strong>Frontend:</strong> Razor View Engine, HTML, CSS, JavaScript, Bootstrap</p>
-                <p class="text-body"><strong>Architecture:</strong> Model-View-Controller (MVC) & Waterfall Methodology</p>
-            </div>
+        <!-- Key Features (Stylized Text List as Requested) -->
+        <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Key <span>Features</span></h2>
+        <div class="glass-card" style="max-width: 900px; margin: 0 auto 100px auto;">
+            <ul class="text-body" style="line-height: 2.2; margin: 0; padding-left: 20px;">
+                <li><strong>Request Management:</strong> Digital forms for users to submit 3D printing requirements (filament type, urgency level, site area, and design attachments).</li>
+                <li><strong>Admin Dashboard:</strong> A centralized control panel for administrators to manage requests, update statuses, and add completion notes.</li>
+                <li><strong>Real-time Tracking:</strong> Users can effortlessly track their request history and monitor the status of their ongoing jobs.</li>
+                <li><strong>Role-Based Access Control:</strong> Secure login and authorization managed by ASP.NET Identity to distinguish between Users and Admins.</li>
+                <li><strong>Data Privacy:</strong> Ensures the confidentiality and security of uploaded design files.</li>
+            </ul>
         </div>
 
         <!-- Project Gallery -->
@@ -87,5 +108,42 @@
     </div>
 
     <script src="js/o_cos.js"></script>
+    <script>
+        // Transition Loader & Entrance Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('split-transition');
+            const heroContent = document.querySelector('.hero-content');
+            
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    if (loader) loader.classList.add('open');
+                    setTimeout(() => {
+                        if (heroContent) heroContent.classList.add('animate-in');
+                    }, 400); 
+                }, 300);
+            });
+        });
+
+        // Page Links transition
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                const targetBlank = this.getAttribute('target');
+                const hasOnclick = this.hasAttribute('onclick');
+                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http') && !hasOnclick) {
+                    const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
+                    if (!isSamePageAnchor) {
+                        e.preventDefault(); 
+                        const loader = document.getElementById('split-transition');
+                        if (loader) loader.classList.remove('open');
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 700); 
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

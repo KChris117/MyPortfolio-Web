@@ -1,0 +1,84 @@
+        :root {
+            --primary: #0f766e; /* Industrial Teal */
+        }
+        .btn-primary {
+            color: white !important;
+            box-shadow: 0 10px 20px rgba(15, 118, 110, 0.3) !important;
+        }
+        .btn-primary:hover {
+            background: #0d9488 !important; /* Lighter Teal */
+            box-shadow: 0 15px 25px rgba(13, 148, 136, 0.4) !important;
+            color: white !important;
+        }
+        .hero-badge {
+            background: rgba(45, 212, 191, 0.15) !important;
+            border-color: rgba(45, 212, 191, 0.3) !important;
+            color: #2dd4bf !important; /* Bright light teal for contrast */
+        }
+        /* Staggered Slices Transition Styles */
+        .stagger-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            pointer-events: none; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .slice {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 20%;
+            background-color: #0f766e;
+            transition: transform 0.6s cubic-bezier(0.8, 0, 0.2, 1);
+            transform-origin: top;
+            border-right: 1px solid rgba(255,255,255,0.05); /* Slight separation line */
+        }
+        .slice:nth-child(1) { left: 0%; transition-delay: 0.0s; }
+        .slice:nth-child(2) { left: 20%; transition-delay: 0.1s; }
+        .slice:nth-child(3) { left: 40%; transition-delay: 0.2s; }
+        .slice:nth-child(4) { left: 60%; transition-delay: 0.3s; }
+        .slice:nth-child(5) { left: 80%; transition-delay: 0.4s; }
+        
+        /* State when page is fully loaded (Slices shrink upwards) */
+        .stagger-transition.open .slice {
+            transform: scaleY(0);
+        }
+        .stagger-transition.open .transition-logo {
+            opacity: 0;
+            transform: scale(0);
+        }
+        .stagger-transition .transition-logo {
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        /* Force 2x2 Grid for Desktop */
+        .cards-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+        
+        /* Fix the 3rd card layout bug on mobile inherited from o_cos.css */
+        @media (max-width: 768px) {
+            .cards-grid .glass-card:nth-child(3) {
+                grid-column: auto !important;
+                justify-self: auto !important;
+                width: auto !important;
+            }
+        }
+        
+        /* Hero Background - Desktop & Mobile Optimization */
+        .hero {
+            background: #121212 url('https://lh3.googleusercontent.com/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5=w2000') no-repeat center right / cover !important;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                background: #121212 url('https://lh3.googleusercontent.com/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5=w2000') no-repeat right top / 200% auto !important;
+            }
+        }

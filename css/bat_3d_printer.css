@@ -1,0 +1,77 @@
+        :root {
+            --primary: #0f766e; /* Industrial Teal */
+        }
+        .btn-primary {
+            color: white !important;
+            box-shadow: 0 10px 20px rgba(15, 118, 110, 0.3) !important;
+        }
+        .btn-primary:hover {
+            background: #0d9488 !important;
+            box-shadow: 0 15px 25px rgba(13, 148, 136, 0.4) !important;
+            color: white !important;
+        }
+        .hero-badge {
+            background: rgba(45, 212, 191, 0.15) !important;
+            border-color: rgba(45, 212, 191, 0.3) !important;
+            color: #2dd4bf !important; /* Bright light teal for contrast */
+        }
+        
+        /* Split Horizontal Transition */
+        .split-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 99999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .split-half {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-color: #0f766e;
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .split-top {
+            top: 0;
+            transform: translateY(0);
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+        .split-bottom {
+            bottom: 0;
+            transform: translateY(0);
+            border-top: 2px solid rgba(255,255,255,0.1);
+        }
+        
+        /* State when page is fully loaded */
+        .split-transition.open .split-top {
+            transform: translateY(-100%);
+        }
+        .split-transition.open .split-bottom {
+            transform: translateY(100%);
+        }
+        
+        .split-transition .transition-logo {
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .split-transition.open .transition-logo {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        
+        /* Hero Background - Desktop & Mobile Optimization */
+        .hero {
+            background: #121212 url('https://lh3.googleusercontent.com/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV=w2000') no-repeat center right / cover !important;
+        }
+        @media (max-width: 768px) {
+            .hero {
+                background: #121212 url('https://lh3.googleusercontent.com/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV=w2000') no-repeat right top / 200% auto !important;
+            }
+        }
