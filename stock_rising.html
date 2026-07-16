@@ -2,20 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Rising - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <!-- Devicon for Tech Stack Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <link rel="stylesheet" href="css/o_cos.css">
+    <style>
+        :root {
+            --primary: #1e3a8a; /* Dark blue theme */
+        }
+        .btn-primary {
+            color: white !important;
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3) !important;
+        }
+        .btn-primary:hover {
+            background: #2563eb !important; /* Lighter blue */
+            box-shadow: 0 15px 25px rgba(37, 99, 235, 0.4) !important;
+            color: white !important;
+        }
+        .hero-badge {
+            background: rgba(30, 58, 138, 0.2) !important;
+            border-color: rgba(30, 58, 138, 0.3) !important;
+        }
+    </style>
 </head>
 <body>
+    <!-- Page Transition Loader -->
+    <div id="page-transition" class="page-transition dissolve-transition">
+        <div class="transition-logo">&lt;c/h&gt;</div>
+    </div>
 
-    <header>
-        <a href="portfolio.html" class="back-btn">
-            ← Back to Portfolio
+    <header class="project-header">
+        <a href="projects.html" class="back-btn">
+            ← Back to My Projects
         </a>
-    
-        <div class="logo">&lt;c/h&gt;</div>
     </header>
 
     <section class="hero" style="background: url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat center center/cover;">
@@ -55,12 +81,18 @@
                     <li><strong>Social Features:</strong> A complete friend system allowing users to search, add, accept, or ignore friend requests.</li>
                 </ul>
             </div>
-            <div class="glass-card">
+            <div>
                 <h2 class="section-title" style="font-size: 32px;">Tech <span>Stack</span></h2>
-                <p class="text-body"><strong>Engine:</strong> Unity (C#)</p>
-                <p class="text-body"><strong>Multiplayer:</strong> Photon Unity Networking (PUN 2)</p>
-                <p class="text-body"><strong>Database & Auth:</strong> Firebase Realtime Database & Anonymous Login</p>
-                <p class="text-body"><strong>UI & 3D Modeling:</strong> Figma, Blender</p>
+                <div class="tech-icons">
+                    <i class="devicon-unity-original" style="color: white;" title="Unity"></i>
+                    <i class="devicon-csharp-plain colored" title="C#"></i>
+                    <i class="devicon-firebase-plain colored" title="Firebase"></i>
+                    <i class="devicon-figma-plain colored" title="Figma"></i>
+                    <i class="devicon-blender-original colored" title="Blender"></i>
+                    <i class="devicon-visualstudio-plain colored" title="Visual Studio"></i>
+                    <i class="devicon-vscode-plain colored" title="VS Code"></i>
+                </div>
+                <p class="text-body" style="margin-top: 30px;">Built with Unity Engine using C# and Photon PUN 2 for real-time multiplayer networking.</p>
             </div>
         </div>
 
@@ -186,5 +218,51 @@
     </div>
 
     <script src="js/o_cos.js"></script>
+    <script>
+        // Transition Loader & Entrance Animation
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-transition');
+            const heroContent = document.querySelector('.hero-content');
+            
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    // 1. Hilangkan loader dengan animasi dissolve
+                    loader.classList.add('dissolve-out');
+                    
+                    // 2. Mainkan animasi masuk konten setelah loader mulai menghilang
+                    setTimeout(() => {
+                        if (heroContent) {
+                            heroContent.classList.add('animate-in');
+                        }
+                    }, 300);
+                    
+                    // 3. Hapus loader dari DOM setelah transisi selesai
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 800);
+                }, 150); // Sedikit jeda agar transisi terasa smooth
+            });
+        });
+
+        // Page Links transition
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                const targetBlank = this.getAttribute('target');
+                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
+                    e.preventDefault(); 
+                    const loader = document.getElementById('page-transition');
+                    if(loader) {
+                        loader.style.display = 'flex';
+                        setTimeout(() => {
+                            loader.classList.remove('dissolve-out');
+                        }, 10);
+                    }
+                    setTimeout(() => { window.location.href = targetUrl; }, 800);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -58,6 +58,8 @@
                 <i class="devicon-react-original colored" title="React.js"></i>
                 <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                 <i class="devicon-mysql-plain colored" title="MySQL"></i>
+                <i class="devicon-vscode-plain colored" title="VS Code"></i>
+                <i class="devicon-figma-plain colored" title="Figma"></i>
             </div>
             <p class="text-body" style="margin-top: 30px;">Built with Laravel, Tailwind CSS, React.js, and MySQL.</p>
         </div>
@@ -197,7 +199,7 @@
             
             requestAnimationFrame(() => {
                 setTimeout(() => {
-                    if (loader) loader.classList.add('fade-out');
+                    if (loader) loader.classList.add('slide-out');
                     setTimeout(() => {
                         if (heroContent) heroContent.classList.add('animate-in');
                     }, 300);
@@ -214,8 +216,13 @@
                 if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
                     e.preventDefault(); 
                     const loader = document.getElementById('page-transition');
-                    if(loader) loader.classList.remove('fade-out');
-                    setTimeout(() => { window.location.href = targetUrl; }, 500);
+                    if(loader) {
+                        loader.style.display = 'flex';
+                        setTimeout(() => {
+                            loader.classList.remove('slide-out');
+                        }, 10);
+                    }
+                    setTimeout(() => { window.location.href = targetUrl; }, 800);
                 }
             });
         });

@@ -34,6 +34,14 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+.page-transition.dissolve-transition {
+    transition: opacity 0.8s ease, filter 0.8s ease, visibility 0.8s ease;
+}
+.page-transition.dissolve-out {
+    opacity: 0;
+    filter: blur(20px);
+    visibility: hidden;
+}
 .transition-logo {
     font-size: 30px;
     font-weight: bold;
@@ -451,23 +459,33 @@ body {
 
 @media (max-width: 900px) {
     .grid-2 { grid-template-columns: 1fr; gap: 40px; }
+    .grid-2 .text-body { font-size: 14px; line-height: 1.6; }
     .hero-title { font-size: 48px; }
     .gallery-grid { grid-template-columns: 1fr; }
     
-    /* About section mobile overrides */
+    /* About & Story mobile overrides */
     #story-title {
         text-align: center;
         margin-bottom: 20px;
         font-size: 32px;
     }
-    .about-grid {
-        grid-template-columns: 60% 40%; /* Kiri teks (60%), Kanan gambar (40%) */
-        gap: 15px;
+    .about-grid, .grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+        text-align: center;
+    }
+    .about-grid > div, .grid-2 > div {
+        display: flex;
+        flex-direction: column;
         align-items: center;
     }
+    .grid-2 ul.text-body {
+        text-align: left;
+        display: inline-block;
+    }
     .story-text {
-        font-size: 11px;
-        line-height: 1.5;
+        font-size: 13px;
+        line-height: 1.6;
         margin-bottom: 10px;
     }
     .about-img-card {
