@@ -376,7 +376,7 @@ body {
 }
 
 .gallery-item::after {
-    content: '🔍 View Full';
+    content: 'View';
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
