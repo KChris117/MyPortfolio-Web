@@ -10,6 +10,7 @@
     <title>O'Cos - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
+    <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/o_cos.css">
     <!-- Devicon for Tech Stack Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -150,7 +151,7 @@
         </div>
         
         <!-- Run Locally -->
-        <h2 class="section-title" style="text-align: center;"margin-top: 100px;">How to Run <span>Locally</span></h2>
+        <h2 class="section-title" style="text-align: center; margin-top: 100px;">How to Run <span>Locally</span></h2>
         <div class="glass-card">
             <p class="text-body" style="margin-bottom: 10px;">Clone this repository and set up your local environment (XAMPP/WAMP):</p>
             <div class="code-block">
@@ -175,47 +176,10 @@
         <img id="lightbox-img" src="" alt="Preview">
     </div>
 
+    <script src="js/shared.js"></script>
     <script src="js/o_cos.js"></script>
-    <script>
-        // Transition Loader & Entrance Animation
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('page-transition');
-            const heroContent = document.querySelector('.hero-content');
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    // 1. Hilangkan loader
-                    loader.classList.add('fade-out');
-                    
-                    // 2. Mainkan animasi masuk konten setelah loader mulai menghilang
-                    setTimeout(() => {
-                        if (heroContent) {
-                            heroContent.classList.add('animate-in');
-                        }
-                    }, 300); // delay 300ms agar pas dengan timing transisi
-                }, 300);
-            });
-        });
-
-        // Page Links transition
-        const links = document.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetUrl = this.getAttribute('href');
-                const targetBlank = this.getAttribute('target');
-                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
-                    const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
-                    if (!isSamePageAnchor) {
-                        e.preventDefault(); 
-                        const loader = document.getElementById('page-transition');
-                        loader.classList.remove('fade-out');
-                        setTimeout(() => {
-                            window.location.href = targetUrl;
-                        }, 500);
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
+
+
+

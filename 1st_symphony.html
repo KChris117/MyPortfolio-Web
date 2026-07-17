@@ -8,6 +8,7 @@
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
     <!-- Devicon for Tech Stack Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/1st_symphony.css">
 </head>
 <body>
@@ -190,42 +191,10 @@
     </div>
 
     <!-- Reuse the same detail project script -->
-    <script src="js/o_cos.js"></script>
-    <script>
-        // Transition Loader & Entrance Animation
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('page-transition');
-            const heroContent = document.querySelector('.hero-content');
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    if (loader) loader.classList.add('slide-out');
-                    setTimeout(() => {
-                        if (heroContent) heroContent.classList.add('animate-in');
-                    }, 300);
-                }, 300);
-            });
-        });
 
-        // Page Links transition
-        const links = document.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetUrl = this.getAttribute('href');
-                const targetBlank = this.getAttribute('target');
-                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
-                    e.preventDefault(); 
-                    const loader = document.getElementById('page-transition');
-                    if(loader) {
-                        loader.style.display = 'flex';
-                        setTimeout(() => {
-                            loader.classList.remove('slide-out');
-                        }, 10);
-                    }
-                    setTimeout(() => { window.location.href = targetUrl; }, 800);
-                }
-            });
-        });
-    </script>
+    <script src="js/shared.js"></script>
+    <script src="js/1st_symphony.js"></script>
 </body>
 </html>
+
+

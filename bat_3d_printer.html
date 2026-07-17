@@ -8,7 +8,7 @@
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
     <!-- Devicon for Tech Stack Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <link rel="stylesheet" href="css/o_cos.css">
+    <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/bat_3d_printer.css">
 </head>
 <body>
@@ -32,7 +32,7 @@
             <h1 class="hero-title">BAT 3D Printer Request App</h1>
             <p class="hero-subtitle">An internal web application for managing and tracking 3D printing requests in a manufacturing environment.</p>
             <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
-                <a href="https://apps.bth.infineon.com/BAT-3DPrinter/" target="_blank" class="btn-primary">🔒 Visit Internal Live Web</a>
+                <a href="https://apps.bth.infineon.com/BAT-3D-Printer/" target="_blank" class="btn-primary"><i class="fas fa-external-link-alt"></i> Visit Internal Live Web</a>
             </div>
         </div>
     </section>
@@ -107,43 +107,11 @@
         <img id="lightbox-img" src="" alt="Preview">
     </div>
 
-    <script src="js/o_cos.js"></script>
-    <script>
-        // Transition Loader & Entrance Animation
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('split-transition');
-            const heroContent = document.querySelector('.hero-content');
-            
-            requestAnimationFrame(() => {
-                setTimeout(() => {
-                    if (loader) loader.classList.add('open');
-                    setTimeout(() => {
-                        if (heroContent) heroContent.classList.add('animate-in');
-                    }, 400); 
-                }, 300);
-            });
-        });
-
-        // Page Links transition
-        const links = document.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetUrl = this.getAttribute('href');
-                const targetBlank = this.getAttribute('target');
-                const hasOnclick = this.hasAttribute('onclick');
-                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http') && !hasOnclick) {
-                    const isSamePageAnchor = targetUrl.includes('.html#') && targetUrl.split('#')[0] === window.location.pathname.split('/').pop();
-                    if (!isSamePageAnchor) {
-                        e.preventDefault(); 
-                        const loader = document.getElementById('split-transition');
-                        if (loader) loader.classList.remove('open');
-                        setTimeout(() => {
-                            window.location.href = targetUrl;
-                        }, 700); 
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="js/shared.js"></script>
+    <script src="js/bat_3d_printer.js"></script>
 </body>
 </html>
+
+
+
+

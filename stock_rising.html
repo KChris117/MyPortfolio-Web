@@ -2,46 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Rising - Detailed Project</title>
     <!-- Premium Fonts -->
     <link href="https://fonts.cdnfonts.com/css/circular-std" rel="stylesheet">
     <!-- Devicon for Tech Stack Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-    <link rel="stylesheet" href="css/o_cos.css">
-    <style>
-        :root {
-            --primary: #1e3a8a; /* Dark blue theme */
-        }
-        .btn-primary {
-            color: white !important;
-            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3) !important;
-        }
-        .btn-primary:hover {
-            background: #2563eb !important; /* Lighter blue */
-            box-shadow: 0 15px 25px rgba(37, 99, 235, 0.4) !important;
-            color: white !important;
-        }
-        .hero-badge {
-            background: rgba(96, 165, 250, 0.15) !important;
-            border-color: rgba(96, 165, 250, 0.3) !important;
-            color: #60a5fa !important; /* Bright light blue for contrast against dark background */
-        }
-        
-        /* Hero Background - Desktop & Mobile Optimization */
-        .hero {
-            background: #121212 url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat center right / cover !important;
-        }
-        @media (max-width: 768px) {
-            .hero {
-                background: #121212 url('https://lh3.googleusercontent.com/d/1TdeCajLuiRkicxWqcOnQpfVOQdq1DibE=w2000') no-repeat right top / 200% auto !important;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/stock_rising.css">
 </head>
 <body>
     <!-- Canvas Dissolve Loader -->
@@ -229,110 +197,8 @@
         <img id="lightbox-img" src="" alt="Preview">
     </div>
 
-    <script src="js/o_cos.js"></script>
-    <script>
-        // Canvas Dissolve Transition Logic
-        const canvas = document.getElementById('dissolve-canvas');
-        const ctx = canvas.getContext('2d', { alpha: true });
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const blockSize = 30; // 10x10 pixel chunks (cukup optimal untuk performa tapi tetap terlihat efek pixelated)
-        let blocks = [];
-
-        function initBlocks() {
-            blocks = [];
-            const cols = Math.ceil(canvas.width / blockSize);
-            const rows = Math.ceil(canvas.height / blockSize);
-            for (let i = 0; i < cols; i++) {
-                for (let j = 0; j < rows; j++) {
-                    blocks.push({ x: i * blockSize, y: j * blockSize });
-                }
-            }
-            // Acak urutan pixel (Fisher-Yates)
-            for (let i = blocks.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
-            }
-        }
-
-        window.addEventListener('load', () => {
-            const heroContent = document.querySelector('.hero-content');
-            const logoOverlay = document.getElementById('canvas-logo-overlay');
-            canvas.style.pointerEvents = 'all';
-            
-            // Isi penuh layar dengan warna hitam di awal
-            ctx.fillStyle = '#1e3a8a';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            initBlocks();
-            
-            const totalFrames = 60; // 1 detik pada 60 FPS
-            const blocksPerFrame = Math.ceil(blocks.length / totalFrames);
-            
-            function dissolveIn() {
-                for (let i = 0; i < blocksPerFrame; i++) {
-                    if (blocks.length === 0) break;
-                    const b = blocks.pop();
-                    ctx.clearRect(b.x, b.y, blockSize, blockSize);
-                }
-                if (blocks.length > 0) {
-                    requestAnimationFrame(dissolveIn);
-                } else {
-                    canvas.style.pointerEvents = 'none'; // Izinkan interaksi
-                }
-            }
-            
-            // Jeda sejenak sebelum efek dissolve dimulai
-            setTimeout(() => {
-                if (logoOverlay) logoOverlay.style.opacity = '0';
-                requestAnimationFrame(dissolveIn);
-                setTimeout(() => {
-                    if (heroContent) heroContent.classList.add('animate-in');
-                }, 300);
-            }, 300); // Tahan logo lebih lama sedikit biar terlihat
-        });
-
-        // Page Links transition (Dissolve Out)
-        const links = document.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function(e) {
-                const targetUrl = this.getAttribute('href');
-                const targetBlank = this.getAttribute('target');
-                if (targetUrl && !targetUrl.startsWith('#') && targetBlank !== '_blank' && !targetUrl.startsWith('http')) {
-                    e.preventDefault(); 
-                    const logoOverlay = document.getElementById('canvas-logo-overlay');
-                    if (logoOverlay) logoOverlay.style.opacity = '0'; // Pastikan hilang di awal transisi keluar
-                    
-                    canvas.style.pointerEvents = 'all';
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    initBlocks();
-                    ctx.fillStyle = '#1e3a8a';
-                    
-                    const totalFrames = 45; // Lebih cepat saat keluar
-                    const blocksPerFrame = Math.ceil(blocks.length / totalFrames);
-                    
-                    function dissolveOut() {
-                        for (let i = 0; i < blocksPerFrame; i++) {
-                            if (blocks.length === 0) break;
-                            const b = blocks.pop();
-                            ctx.fillRect(b.x, b.y, blockSize, blockSize);
-                        }
-                        if (blocks.length > 0) {
-                            requestAnimationFrame(dissolveOut);
-                        } else {
-                            if (logoOverlay) logoOverlay.style.opacity = '1';
-                            setTimeout(() => { window.location.href = targetUrl; }, 300);
-                        }
-                    }
-                    requestAnimationFrame(dissolveOut);
-                }
-            });
-        });
-    </script>
+    <script src="js/shared.js"></script>
+    <script src="js/stock_rising.js"></script>
 </body>
 </html>
+
