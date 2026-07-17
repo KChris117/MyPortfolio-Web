@@ -91,10 +91,20 @@
 
     <header class="navbar">
         <a href="index.html" class="logo" style="text-decoration: none;">&lt;c/h&gt;</a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
         <nav class="nav-links">
             <a href="index.html">Home</a>
             <a href="index.html#about-me">About Me</a>
-            <a href="#contact-me">Contact Me</a>
+            <a href="experience.html">Experience</a>
+            <a href="achievements.html">Achievements</a>
+            <a href="certificates.html" style="color: var(--primary);">Certificates</a>
+            <a href="index.html#contact-me">Contact Me</a>
             <a href="projects.html">Projects</a>
         </nav>
     </header>
@@ -139,8 +149,11 @@
                 <ul class="footer-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#about-me">About Me</a></li>
+                    <li><a href="experience.html">Experience</a></li>
+                    <li><a href="achievements.html">Achievements</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
                     <li><a href="projects.html">Projects</a></li>
-                    <li><a href="#contact-me">Contact</a></li>
+                    <li><a href="index.html#contact-me">Contact</a></li>
                 </ul>
             </div>
             
@@ -154,6 +167,12 @@
                     <a href="https://www.youtube.com/@ChristoffelAristo" target="_blank" title="YouTube"><img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"></a>
                 </div>
             </div>
+        </div>
+        
+        <!-- Footer Bottom Text -->
+        <div class="footer-bottom-text">
+            Made by <strong>Christoffel Aristo Marbun</strong>,<br>
+            using <strong>HTML, CSS, and JS</strong>.
         </div>
     </footer>
 
@@ -192,6 +211,33 @@
                 }
             });
         });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinksMenu = document.querySelector('.nav-links');
+        if(mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+                navLinksMenu.classList.toggle('active');
+            });
+            
+            // Close menu when a link is clicked
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navLinksMenu.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !navLinksMenu.contains(e.target) && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    navLinksMenu.classList.remove('active');
+                }
+            });
+        }
 
         // Lightbox Logic & Watermark Logic
         const lightbox = document.getElementById('lightbox-cert');

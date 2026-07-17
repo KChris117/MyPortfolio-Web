@@ -1,0 +1,155 @@
+/* achievements.css */
+
+.achievement-showcase {
+    background: #111;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.achievement-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.achievement-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.achievement-desc {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.achievement-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.ach-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ach-card:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.ach-card-img-wrapper {
+    overflow: hidden;
+    cursor: zoom-in;
+    aspect-ratio: 16 / 9;
+    flex: 1;
+    position: relative;
+    max-width: 50%;
+}
+
+.ach-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.ach-card:hover img {
+    transform: scale(1.05);
+}
+
+.ach-card-content {
+    padding: 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ach-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.ach-card-text {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Lightbox Styles */
+.lightbox-ach {
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    cursor: pointer;
+}
+
+.lightbox-ach.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-ach img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lightbox-ach.active img {
+    transform: scale(1);
+}
+
+@media (max-width: 768px) {
+    .achievement-gallery {
+        gap: 30px;
+    }
+    .ach-card {
+        flex-direction: column !important;
+    }
+    .ach-card-img-wrapper {
+        max-width: 100%;
+        width: 100%;
+    }
+    .ach-card-content {
+        padding: 20px;
+    }
+    .ach-card-title {
+        font-size: 20px;
+    }
+    .achievement-showcase {
+        padding: 20px;
+    }
+}

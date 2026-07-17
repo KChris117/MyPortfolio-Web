@@ -258,19 +258,25 @@ window.addEventListener('load', () => {
             "https://drive.google.com/file/d/17s34rzSQzPtW293jXwVGUHcM1xc0_4zV/view?usp=drive_link"
         ],
         "BAT Assembly Engineering": [
-            "https://drive.google.com/file/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5/view?usp=drive_link",
-            "https://drive.google.com/file/d/1VqJ60oiJaCyRKzOCbrrxR2SjA8v1ZjeV/view?usp=drive_link",
-            "https://drive.google.com/file/d/1xVcwsAz0H9vDFJxRjLVoOc0waJmYXpLh/view?usp=drive_link"
+            "https://drive.google.com/file/d/1OBRIGBiHjPSIc8-tHlY7JZuTTfwzZKZE/view?usp=sharing",
+            "https://drive.google.com/file/d/1A5M-tpf0sZ__lu8KKdVFPVPjSQi09q-q/view?usp=drive_link",
+            "https://drive.google.com/file/d/16sAmaa1Ev6z-pmZT-e5gBWOSsJ_ziFlU/view?usp=drive_link",
+            "https://drive.google.com/file/d/10gyjwsV9Ek7yJtywg0dBv73Lq76UfV59/view?usp=drive_link",
+            "https://drive.google.com/file/d/1rrwwnuxW4MedjmhuEZ4cxcQNEZwLCV7j/view?usp=drive_link",
+            "https://drive.google.com/file/d/1aaazOtqg1_H5uPmohcJw3Rmno4Vm6tki/view?usp=drive_link",
+            "https://drive.google.com/file/d/1WJxMg-rFgYy1whpHLULOMLkA9d6YrhP6/view?usp=drive_link",
+            "https://drive.google.com/file/d/1GQx-GDiUCl7FjGaqCpWSNER8hQbHM9RD/view?usp=drive_link",
+            "https://drive.google.com/file/d/1CotpH2jTwFqNMyqfRTu9pOWstf_ukm7D/view?usp=drive_link",
+            "https://drive.google.com/file/d/16rzGVUQrVC7WFXm9wiDckaRv8bPqd0Ya/view?usp=drive_link",
+            "https://drive.google.com/file/d/15E6JcdzLxRCk2Aax-L6QyxLPAGYarK4J/view?usp=drive_link",
+            "https://drive.google.com/file/d/16rzGVUQrVC7WFXm9wiDckaRv8bPqd0Ya/view?usp=drive_link",
+            "https://drive.google.com/file/d/1A8WDtjZm4IidO-n7j6xtpY_QLLnR5UUk/view?usp=drive_link",
+            "https://drive.google.com/file/d/13l96LkWVFKj5qTSpHV6nZETCd3sEQOo1/view?usp=drive_link"
         ],
             "BAT 3D Printer App": [
             "https://drive.google.com/file/d/1fo99UzNURF3AmbSlbNRSlSSxU4zp1ryV/view?usp=drive_link",
             "https://drive.google.com/file/d/16uIZdXa3TwFWJ12dKvyVsKkjJGPTdR13/view?usp=drive_link",
             "https://drive.google.com/file/d/1zzv8oWibJQiWeH7MdgWh2WYs5h32U6Nd/view?usp=drive_link"
-        ],
-        "Certificates": [
-            "https://drive.google.com/file/d/1lu5IQ9XqMuS1Zf_do0xrSdUFOrNAltJt/view?usp=drive_link",
-            "https://drive.google.com/file/d/1srxv1SRjC7gftlGc9Ndoyq50SnGfqEtj/view?usp=drive_link",
-            "https://drive.google.com/file/d/1H1llbbuV53luwTnFjZKud4s6uwe9gmBW/view?usp=drive_link"
         ]
     };
 
@@ -281,8 +287,7 @@ window.addEventListener('load', () => {
         "GuideME": "<strong>Your Personal Tour Guide</strong><br>Guide Me is a Progressive Web App designed to provide complete tourist destination information in Batam, equipped with AI and Google Maps API for real-time navigation.",
         "Stock Rising": "<strong>Stock Rising</strong><br>A digital board game for stock investment simulation built on Android using Unity and Photon PUN 2 for multiplayer. Play with 2-5 players and learn how to invest!",
         "BAT Assembly Engineering": "<strong>BAT Assembly Engineering App</strong><br>An internal web application built with ASP.NET MVC to manage inventory, track part transactions, and digitalize the Purchase Requisition (PR) and Purchase Order (PO) approval workflow.",
-        "BAT 3D Printer App": "<strong>3D Printer Request Web App</strong><br>An internal web application built with ASP.NET MVC to streamline and track 3D printing requests, replacing manual unstructured communication with a centralized dashboard.",
-        "Certificates": "<strong>My Certificates & Awards</strong><br>A collection of my professional certificates, awards, and achievements."
+        "BAT 3D Printer App": "<strong>3D Printer Request Web App</strong><br>An internal web application built with ASP.NET MVC to streamline and track 3D printing requests, replacing manual unstructured communication with a centralized dashboard."
     };
 
     // WADAH LINK PROJECT (File HTML Detail)
@@ -292,8 +297,7 @@ window.addEventListener('load', () => {
         "GuideME": "guideme.html",
         "Stock Rising": "stock_rising.html",
         "BAT Assembly Engineering": "bat_assembly.html",
-        "BAT 3D Printer App": "bat_3d_printer.html",
-        "Certificates": "certificates.html"
+        "BAT 3D Printer App": "bat_3d_printer.html"
     };
 
     // Fungsi helper untuk mengekstrak ID dari link GDrive dan merubahnya ke format lh3

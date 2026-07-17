@@ -75,10 +75,10 @@
         
         /* Hero Background - Desktop & Mobile Optimization */
         .hero {
-            background: #121212 url('https://lh3.googleusercontent.com/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5=w2000') no-repeat center right / cover !important;
+            background: #121212 url('https://lh3.googleusercontent.com/d/1OBRIGBiHjPSIc8-tHlY7JZuTTfwzZKZE=w2000') no-repeat center right / cover !important;
         }
         @media (max-width: 768px) {
             .hero {
-                background: #121212 url('https://lh3.googleusercontent.com/d/16G7sB95Bbjm8iX3IOj5d7mpEVO8dtJz5=w2000') no-repeat right top / 200% auto !important;
+                background: #121212 url('https://lh3.googleusercontent.com/d/1OBRIGBiHjPSIc8-tHlY7JZuTTfwzZKZE=w2000') no-repeat right top / 200% auto !important;
             }
         }
