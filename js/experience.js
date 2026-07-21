@@ -166,3 +166,28 @@ window.addEventListener('load', () => {
                 observer.observe(block);
             });
         });
+
+        // Lightbox Logic for Experience Images
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const timelineImages = document.querySelectorAll('.timeline-img-wrapper img');
+
+            if (lightbox && lightboxImg) {
+                // Open Lightbox
+                timelineImages.forEach(img => {
+                    img.style.cursor = 'pointer'; // Make images appear clickable
+                    img.addEventListener('click', () => {
+                        lightboxImg.src = img.src;
+                        lightbox.classList.add('active');
+                    });
+                });
+
+                // Close Lightbox
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target !== lightboxImg) {
+                        lightbox.classList.remove('active');
+                    }
+                });
+            }
+        });
