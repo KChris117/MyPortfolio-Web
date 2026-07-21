@@ -71,7 +71,98 @@ window.addEventListener('load', () => {
                     const targetContent = document.getElementById(targetId);
                     if(targetContent) {
                         targetContent.classList.add('active');
+                        
+                        // 1. Reset all animations in the target tab
+                        const allBlocks = targetContent.querySelectorAll('.timeline-block');
+                        allBlocks.forEach(b => {
+                            b.classList.remove('is-visible');
+                            // We must re-observe them so they trigger again
+                            observer.observe(b);
+                        });
+
+                        const mainLine = targetContent.querySelector('.timeline-main-line');
+                        if(mainLine) {
+                            // Turn off transition temporarily for instant reset
+                            mainLine.style.transition = 'none';
+                            mainLine.style.height = '0px';
+                            // Force reflow
+                            void mainLine.offsetWidth;
+                            mainLine.style.transition = 'height 0.3s linear';
+                        }
+
+                        // 2. Clear the animation queue
+                        animationQueue = [];
+
+                        // 3. Auto scroll to the top of the timeline section
+                        const header = document.querySelector('.experience-header');
+                        if(header) {
+                            window.scrollTo({
+                                top: header.offsetTop - 20, 
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
+            });
+
+            // --- Scroll Animation Queue Logic ---
+            let isAnimating = false;
+            let animationQueue = [];
+
+            const processQueue = () => {
+                if (isAnimating || animationQueue.length === 0) return;
+                
+                isAnimating = true;
+                const block = animationQueue.shift();
+                
+                // Find the main line in this block's container
+                const container = block.closest('.timeline-container');
+                const mainLine = container.querySelector('.timeline-main-line');
+                
+                // Calculate target height for the main line
+                // It should reach 25px into the block (where the branch line starts)
+                const targetHeight = block.offsetTop + 25;
+                
+                // Ensure main line is at least this tall (don't shrink if scrolling up)
+                const currentHeight = parseInt(mainLine.style.height || 0);
+                if (targetHeight > currentHeight) {
+                    mainLine.style.height = targetHeight + 'px';
+                }
+                
+                // Wait for main line to draw (0.3s transition), then start block animation
+                setTimeout(() => {
+                    block.classList.add('is-visible');
+                    
+                    // Total CSS sequence duration is roughly 1300ms
+                    // 0s: horizontal, 0.3s: vertical, 0.6s: dot, 0.8s: card (takes 0.5s = 1.3s total)
+                    setTimeout(() => {
+                        isAnimating = false;
+                        processQueue(); // Process next in queue
+                    }, 1300);
+                    
+                }, 300);
+            };
+
+            // Intersection Observer to detect blocks entering viewport
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -15% 0px', // Trigger slightly before the bottom of the screen
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('is-visible')) {
+                        // Add to queue and unobserve
+                        animationQueue.push(entry.target);
+                        observer.unobserve(entry.target);
+                        processQueue();
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all blocks initially
+            document.querySelectorAll('.timeline-block').forEach(block => {
+                observer.observe(block);
             });
         });

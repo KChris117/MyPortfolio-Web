@@ -98,21 +98,26 @@
     margin: 0 auto 50px;
     padding: 20px 0;
 }
-.timeline-container::after {
-    content: '';
+.timeline-main-line {
     position: absolute;
     width: 6px;
-    background: #111; /* Solid structural line */
+    background: #111;
     top: 0;
-    bottom: 0;
     left: 50%;
     margin-left: -3px;
     border-radius: 5px;
     z-index: 0;
+    height: 0; /* JavaScript will animate this */
+    transition: height 0.3s linear;
 }
 
 /* Timeline Item (Card Wrapper) */
 .timeline-block {
+    --branch-h-width: 0px;
+    --branch-v-height: 0px;
+    --dot-scale: 0;
+    --card-opacity: 0;
+    --card-y: 30px;
     padding: 50px 50px 10px 50px; /* Top padding allows space for the branching line */
     position: relative;
     background-color: inherit;
@@ -128,6 +133,15 @@
     left: 50%;
 }
 
+/* is-visible state for animation */
+.timeline-block.is-visible {
+    --branch-h-width: calc(50% + 5px); /* desktop default */
+    --branch-v-height: 25px;
+    --dot-scale: 1;
+    --card-opacity: 1;
+    --card-y: 0px;
+}
+
 /* Horizontal Connecting Line */
 .timeline-block::before {
     content: '';
@@ -136,14 +150,17 @@
     height: 4px;
     background: #111;
     z-index: 0;
+    width: var(--branch-h-width);
+    transition: width 0.3s ease;
+}
+.timeline-block.is-visible::before {
+    transition: width 0.3s ease 0s;
 }
 .timeline-block.left::before {
     right: -3px; /* Start perfectly from center line */
-    width: calc(50% + 5px); /* Ensure it overlaps the vertical line perfectly to make a 90 degree corner */
 }
 .timeline-block.right::before {
     left: -3px;
-    width: calc(50% + 5px);
 }
 
 /* Vertical Connecting Line */
@@ -152,9 +169,13 @@
     position: absolute;
     top: 25px;
     width: 4px;
-    height: 25px; /* Goes exactly down to the card (50px top padding) */
+    height: var(--branch-v-height);
     background: #111;
     z-index: 0;
+    transition: height 0.3s ease;
+}
+.timeline-block.is-visible::after {
+    transition: height 0.3s ease 0.3s;
 }
 .timeline-block.left::after {
     right: calc(50% - 2px);
@@ -173,7 +194,12 @@
     border-radius: 24px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.06);
     border: 1px solid rgba(0,0,0,0.05);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    opacity: var(--card-opacity);
+    transform: translateY(var(--card-y));
+    transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+}
+.timeline-block.is-visible .timeline-content {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s, opacity 0.5s ease 0.8s, box-shadow 0.4s ease;
 }
 .timeline-content:hover {
     transform: translateY(-8px) scale(1.02);
@@ -186,7 +212,7 @@
     position: absolute;
     top: -12px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(var(--dot-scale));
     width: 24px;
     height: 24px;
     background-color: #111;
@@ -196,6 +222,9 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
     box-sizing: border-box;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+.timeline-block.is-visible .timeline-content::before {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.6s, background-color 0.3s ease;
 }
 .timeline-content:hover::before {
     transform: translateX(-50%) scale(1.2);
@@ -264,46 +293,75 @@
         gap: 10px;
     }
     .tab-btn {
-        padding: 10px 15px;
-        font-size: 14px;
+        padding: 8px 15px;
+        font-size: 13px;
         flex: 1 1 calc(50% - 10px);
         text-align: center;
     }
-    .timeline-container::after {
-        left: 31px; 
+    
+    /* Keep center line exactly in the middle */
+    .timeline-main-line {
+        left: 50%; 
     }
+    
+    /* Scale down the blocks to 50% so they stay left/right */
     .timeline-block {
-        width: 100%;
-        padding: 50px 20px 10px 70px;
-        margin-bottom: 20px;
+        width: 50%;
+        padding: 30px 15px 10px 15px;
+        margin-bottom: 10px;
     }
-    .timeline-block.left, .timeline-block.right {
+    .timeline-block.left {
         left: 0;
     }
-    
-    /* Horizontal line on mobile */
-    .timeline-block.left::before, .timeline-block.right::before {
-        left: 31px;
-        right: auto;
-        width: calc(50% - 4px); /* (50% + 25px card center) - 31px start + 2px flush = 50% - 4px */
+    .timeline-block.right {
+        left: 50%;
     }
-    
-    /* Vertical line on mobile */
-    .timeline-block.left::after, .timeline-block.right::after {
-        left: calc(50% + 25px - 2px); /* Center of card minus half of 4px */
-        right: auto;
+
+    /* Adjust branch line dimensions */
+    .timeline-block.is-visible {
+        --branch-h-width: calc(50% + 5px); 
+        --branch-v-height: 15px;
     }
-    
+    .timeline-block::before {
+        top: 15px;
+    }
+    .timeline-block::after {
+        top: 15px;
+    }
+
+    /* Smaller Dot */
+    .timeline-content::before {
+        width: 16px;
+        height: 16px;
+        top: -8px;
+        border-width: 3px;
+    }
+
+    /* Scale down Card UI */
     .timeline-content {
-        padding: 20px;
+        padding: 15px;
+        border-radius: 16px;
     }
     .timeline-img-wrapper {
-        height: 180px;
+        height: 100px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    .exp-date {
+        padding: 4px 10px;
+        font-size: 10px;
+        margin-bottom: 10px;
     }
     .exp-title {
-        font-size: 20px;
+        font-size: 15px;
+        line-height: 1.3;
+    }
+    .exp-subtitle {
+        font-size: 12px;
+        margin-bottom: 10px;
     }
     .exp-desc {
-        font-size: 14px;
+        font-size: 11px;
+        line-height: 1.5;
     }
 }
