@@ -105,3 +105,49 @@
             });
         });
 
+// Intercept Hardware/Browser Back Button for Exit Animation
+let isNavigatingBack = false;
+window.addEventListener('pageshow', (event) => {
+    isNavigatingBack = false;
+    setTimeout(() => { history.pushState('fake-back', null, location.href); }, 100);
+});
+window.addEventListener('popstate', (event) => {
+    if (isNavigatingBack) return;
+    isNavigatingBack = true;
+    const canvas = document.getElementById('dissolve-canvas');
+    if (!canvas) { history.back(); return; }
+    const ctx = canvas.getContext('2d', { alpha: true });
+    const logoOverlay = document.getElementById('canvas-logo-overlay');
+    if (logoOverlay) logoOverlay.style.opacity = '0';
+    canvas.style.pointerEvents = 'all';
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const blockSize = 30;
+    let blocks = [];
+    const cols = Math.ceil(canvas.width / blockSize);
+    const rows = Math.ceil(canvas.height / blockSize);
+    for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) { blocks.push({ x: i * blockSize, y: j * blockSize }); }
+    }
+    for (let i = blocks.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
+    }
+    ctx.fillStyle = '#1e3a8a';
+    const totalFrames = 45;
+    const blocksPerFrame = Math.ceil(blocks.length / totalFrames);
+    function dissolveOut() {
+        for (let i = 0; i < blocksPerFrame; i++) {
+            if (blocks.length === 0) break;
+            const b = blocks.pop();
+            ctx.fillRect(b.x, b.y, blockSize, blockSize);
+        }
+        if (blocks.length > 0) {
+            requestAnimationFrame(dissolveOut);
+        } else {
+            if (logoOverlay) logoOverlay.style.opacity = '1';
+            setTimeout(() => { history.back(); }, 300);
+        }
+    }
+    requestAnimationFrame(dissolveOut);
+});
+

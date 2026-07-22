@@ -40,4 +40,11 @@
         text-align: center;
         gap: 30px;
     }
+    
+    /* Swap Technical Skills and Achievements for Mobile */
+    .masonry-grid .card:nth-child(1) { order: 1; }
+    .masonry-grid .card:nth-child(2) { order: 3; }
+    .masonry-grid .card:nth-child(3) { order: 2; }
+    .masonry-grid .card:nth-child(4) { order: 4; }
+    .masonry-grid .card:nth-child(5) { order: 5; }
 }

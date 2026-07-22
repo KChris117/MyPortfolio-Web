@@ -122,3 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+// Intercept Hardware/Browser Back Button for Exit Animation
+let isNavigatingBack = false;
+window.addEventListener('pageshow', (event) => {
+    isNavigatingBack = false;
+    setTimeout(() => { history.pushState('fake-back', null, location.href); }, 100);
+});
+window.addEventListener('popstate', (event) => {
+    if (isNavigatingBack) return;
+    isNavigatingBack = true;
+    const loader = document.getElementById('page-transition');
+    if(loader) loader.classList.remove('circle-out');
+    setTimeout(() => { history.back(); }, 800);
+});
+
