@@ -63,10 +63,6 @@ window.addEventListener('load', () => {
 
     // 1. FUNGSI SLIDESHOW OTOMATIS (Mendukung Vertikal PC & Horizontal HP)
     function autoScroll() {
-        if (isModalOpen) {
-            requestAnimationFrame(autoScroll);
-            return;
-        }
 
         if (isMobile) {
             // HP: HORIZONTAL SLIDESHOW
