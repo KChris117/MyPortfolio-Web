@@ -149,8 +149,11 @@ window.addEventListener('load', () => {
             const timelineImages = document.querySelectorAll('.timeline-img-wrapper img');
 
             if (lightbox && lightboxImg) {
+                // Select images inside timeline OR accordion gallery
+                const galleryImages = document.querySelectorAll('.timeline-img-wrapper img, .accordion-gallery img');
+                
                 // Open Lightbox
-                timelineImages.forEach(img => {
+                galleryImages.forEach(img => {
                     img.style.cursor = 'pointer'; // Make images appear clickable
                     img.addEventListener('click', () => {
                         lightboxImg.src = img.src;
@@ -165,4 +168,12 @@ window.addEventListener('load', () => {
                     }
                 });
             }
+
+            // Accordion Logic
+            const accordions = document.querySelectorAll('.accordion-header');
+            accordions.forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                });
+            });
         });

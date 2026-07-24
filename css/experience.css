@@ -404,3 +404,139 @@
 .lightbox.active img {
     transform: scale(1);
 }
+
+/* =========================================
+   EXPANDABLE BENTO CARDS (For Workshop Tab)
+========================================= */
+.expandable-bento-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.expandable-bento-item {
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #1a1a1a;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: box-shadow 0.4s ease;
+    border: 1px solid #333;
+}
+
+.expandable-bento-item:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.expandable-bento-header {
+    position: relative;
+    width: 100%;
+    height: 180px; /* Banner height */
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex; /* Override accordion flex */
+}
+
+.expandable-bento-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    z-index: 1;
+}
+
+.expandable-bento-header:hover .expandable-bento-bg {
+    transform: scale(1.05);
+}
+
+.expandable-bento-overlay {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 25px 30px;
+    box-sizing: border-box;
+    transition: background 0.4s ease;
+}
+
+.expandable-bento-header:hover .expandable-bento-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.3) 100%);
+}
+
+.expandable-bento-text {
+    text-align: left;
+}
+
+.expandable-bento-date {
+    color: #ffd700;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.expandable-bento-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.accordion-icon {
+    font-size: 28px;
+    font-weight: 300;
+    color: white;
+    transition: transform 0.4s ease;
+    margin-bottom: 5px;
+}
+
+.expandable-bento-header.active .accordion-icon {
+    transform: rotate(45deg); /* + becomes x */
+}
+
+/* Expanding Content Logic */
+.expandable-bento-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+    background: #111;
+}
+
+.expandable-bento-header.active + .expandable-bento-content {
+    grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+    overflow: hidden;
+}
+
+.expandable-bento-inner-content {
+    padding: 30px;
+}
+
+.expandable-bento-inner-content p {
+    color: #ccc;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.accordion-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}

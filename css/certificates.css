@@ -1,30 +1,68 @@
-/* Override masonry-grid to be exactly 3 columns (Grid) */
-        .masonry-grid {
-            display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
+/* Flexbox Layout for Centering Orphans */
+        .certificates-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
-            column-count: auto !important; 
+            width: 100%;
+            margin-bottom: 30px;
         }
         .cert-card {
-            padding: 10px;
+            padding: 15px;
             cursor: zoom-in;
-            margin-bottom: 0 !important; /* Margin bawah digantikan oleh gap grid */
-            width: 100% !important; 
+            width: calc(33.333% - 14px); /* Default 3 per row */
             box-sizing: border-box;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            background: #1a1a1a;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* 4-3-3 Formation for Landscape */
+        .landscape-grid .cert-card:nth-child(1),
+        .landscape-grid .cert-card:nth-child(2),
+        .landscape-grid .cert-card:nth-child(3),
+        .landscape-grid .cert-card:nth-child(4) {
+            width: calc(25% - 15px);
+        }
+        .landscape-grid .cert-card:nth-child(n+5) {
+            width: calc(33.333% - 14px);
+        }
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: #444;
         }
         .cert-card img {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
             display: block;
+            margin-bottom: 15px;
         }
         .cert-card:hover img {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .cert-info {
+            width: 100%;
+        }
+        .cert-info h3 {
+            color: #fff;
+            font-size: 16px;
+            margin: 0 0 5px 0;
+            line-height: 1.4;
+        }
+        .cert-info p {
+            color: #999;
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.4;
         }
         .lightbox-cert {
             position: fixed;
@@ -59,15 +97,22 @@
             transform: scale(1);
         }
         @media (max-width: 768px) {
-            .masonry-grid {
-                gap: 10px; /* Perkecil jarak antar gambar di HP */
-                /* Tetap 3 kolom di HP, tidak diubah */
+            .certificates-grid {
+                gap: 15px; 
             }
             .cert-card {
-                padding: 5px; /* Perkecil ruang putih di HP agar gambar lebih maksimal */
-                border-radius: 8px; /* Sudut sedikit ditajamkan di HP */
+                width: calc(50% - 10px) !important; /* 2 per row on mobile, overriding landscape too */
+                padding: 10px; 
+                border-radius: 12px; 
             }
             .cert-card img {
-                border-radius: 6px; 
+                border-radius: 8px; 
+                margin-bottom: 10px;
+            }
+            .cert-info h3 {
+                font-size: 14px;
+            }
+            .cert-info p {
+                font-size: 11px;
             }
         }
